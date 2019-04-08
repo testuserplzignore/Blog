@@ -22,12 +22,12 @@ users = User.create(
 posts = Post.create(
   [
     {
-      title: 'titties and beer',
+      title: 'inoffensive title',
       content: 'My favorite things',
       user_id: 1,
     },
     {
-      title: 'weed',
+      title: 'more inoffensive',
       content: 'meant to list this with the others but I forgot',
       user_id: 1,
     }
@@ -37,8 +37,8 @@ posts = Post.create(
 comments = Comment.create(
   [
     {
-      title: 'what about weed?',
-      content: 'ya fuckin pothead',
+      title: 'inoffensive comment',
+      content: 'inoffensive content',
       user_id: 2,
       post_id: 1,
     },
