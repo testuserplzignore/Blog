@@ -13,7 +13,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       render json: @post
-    else render json: { errors: @post.errors }, status: :unprocessable_entity
+    else
+      render json: { errors: @post.errors }, status: :unprocessable_entity
+    end
   end
 
   def update
