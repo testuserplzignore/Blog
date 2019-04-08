@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user
     else
-      render json: { errors: @planet.errors }, status: :unprocessable_entity
+      render json: { errors: @user.errors }, status: :unprocessable_entity
     end
   end
 
@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     head 204
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:username, :email, :password)
   end
 
 end
