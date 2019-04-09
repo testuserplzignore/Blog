@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-
+  skip_before_action :ensure_signed_in, only: [:index, :create]
+  
   def index
     @post = Post.find(params[:post_id])
     @comments = @post.comments

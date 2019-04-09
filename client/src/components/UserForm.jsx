@@ -5,17 +5,19 @@ const UserForm = (props) => {
     userFormData,
     handleUserFormChange,
     handleUserFormCreate,
+    handleLogin,
   } = props
 
   return (
-    <form onSubmit={handleUserFormCreate}>
-      <input
+    <form onSubmit={handleUserFormCreate || handleLogin}>
+      {!handleLogin &&
+        <input
         type='text'
         name='username'
         placeholder='Username'
         value={userFormData.username}
         onChange={handleUserFormChange}
-      />
+      />}
       <input
         type='text'
         name='email'

@@ -6,6 +6,12 @@ const api = axios.create({
   dataType: "json",
 })
 
+const updateToken = token => {
+  localStorage.setItem('authToken', token)
+  api.defaults.headers.common.authorization = `Bearer ${token}`
+}
+
 export {
-  api
+  api,
+  updateToken,
 }

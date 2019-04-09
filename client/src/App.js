@@ -14,9 +14,12 @@ import {
 } from './services/comments'
 
 import {
-  createUser
+  createUser,
+  loginUser,
+  verifyToken,
 } from './services/users'
 
+import Header from './components/Header'
 import Main from './components/Main'
 
 class App extends Component {
@@ -29,6 +32,7 @@ class App extends Component {
 
     this.handleUserFormChange = this.handleUserFormChange.bind(this)
     this.handleUserFormCreate = this.handleUserFormCreate.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
 
     this.state = {
       posts: [],
@@ -51,6 +55,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    verifyToken()
     const posts = await getPosts()
 
     this.setState({
@@ -63,16 +68,6 @@ class App extends Component {
     this.setState(prevState =>({
       postFormData: {
         ...prevState.postFormData,
-        [name]: value
-      }
-    }));
-  }
-
-  handleUserFormChange(e) {
-    const { name, value } = e.target;
-    this.setState(prevState =>({
-      userFormData: {
-        ...prevState.userFormData,
         [name]: value
       }
     }));
@@ -97,11 +92,35 @@ class App extends Component {
     })
   }
 
+  handleUserFormChange(e) {
+    const { name, value } = e.target;
+    this.setState(prevState =>({
+      userFormData: {
+        ...prevState.userFormData,
+        [name]: value
+      }
+    }));
+  }
+
+
   async handleUserFormCreate(e){
     e.preventDefault()
-    console.log('hey');
     const { userFormData } = this.state
     const user = await createUser(userFormData)
+    console.log(user);
+    this.setState({
+      userFormData: {
+        username: '',
+        email: '',
+        password: '',
+      },
+    })
+  }
+
+  async handleLogin(e){
+    e.preventDefault()
+    const { email, password } = this.state.userFormData
+    const user = await loginUser(email, password)
     console.log(user);
     this.setState({
       userFormData: {
@@ -128,11 +147,14 @@ class App extends Component {
   render() {
     const {
       state,
+
       postViewCheck,
       handlePostFormChange,
       handlePostFormCreate,
+
       handleUserFormChange,
       handleUserFormCreate,
+      handleLogin,
     } = this
     const {
       userFormData,
@@ -145,6 +167,11 @@ class App extends Component {
     } = state
     return (
       <div className="App">
+        <Header
+          userFormData={userFormData}
+          handleUserFormChange={handleUserFormChange}
+          handleLogin={handleLogin}
+        />
         <Main
           posts={posts}
           postFormData={postFormData}

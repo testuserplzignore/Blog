@@ -10,12 +10,14 @@ users = User.create(
   [
     {
       username: 'bob',
-      email: 'bob@bob.com'
+      email: 'bob@bob.com',
+      password: 'pass',
     },
     {
       username: 'tom',
-      email: 'tom@tom.com'
-    }
+      email: 'tom@tom.com',
+      password: 'pass',
+    },
   ]
 )
 
@@ -30,7 +32,7 @@ posts = Post.create(
       title: 'more inoffensive',
       content: 'meant to list this with the others but I forgot',
       user_id: 1,
-    }
+    },
   ]
 )
 
@@ -47,6 +49,6 @@ comments = Comment.create(
       content: "I'll make a new post",
       user_id: 1,
       post_id: 1,
-    }
+    },
   ]
 )
