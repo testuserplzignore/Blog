@@ -16,6 +16,7 @@ input[type=submit] {
   font-size: 16px;
 }
 
-.App {
-  text-align: center;
+.post {
+  width: 80%;
+  margin: 0 auto;
 }

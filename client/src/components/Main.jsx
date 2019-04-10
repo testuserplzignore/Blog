@@ -20,12 +20,14 @@ const Main = props => {
     posts,
     postFormData,
     handlePostFormChange,
+    handleSlatePostChange,
     handlePostFormCreate,
 
     post,
     comments,
     commentFormData,
     handleCommentFormChange,
+    handleSlateCommentChange,
     handleCommentFormCreate,
     postViewCheck,
   } = props
@@ -39,6 +41,7 @@ const Main = props => {
           posts={posts}
           postFormData={postFormData}
           handlePostFormChange={handlePostFormChange}
+          handleSlatePostChange={handleSlatePostChange}
           handlePostFormCreate={handlePostFormCreate}
         />
       )} />
@@ -79,6 +82,7 @@ const Main = props => {
           comments={comments}
           commentFormData={commentFormData}
           handleCommentFormChange={handleCommentFormChange}
+          handleSlateCommentChange={handleSlateCommentChange}
           handleCommentFormCreate={handleCommentFormCreate}
           postViewCheck={postViewCheck}
         />

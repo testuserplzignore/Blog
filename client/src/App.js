@@ -4,6 +4,7 @@ import './App.css';
 import './style/header.css'
 import './style/form.css'
 import { withRouter } from 'react-router-dom'
+import { initialValue } from './components/slate/slateHelpers'
 
 import {
   getPosts,
@@ -33,6 +34,7 @@ class App extends Component {
 
     this.postViewCheck = this.postViewCheck.bind(this)
     this.handlePostFormChange = this.handlePostFormChange.bind(this)
+    this.handleSlatePostChange = this.handleSlatePostChange.bind(this)
     this.handlePostFormCreate = this.handlePostFormCreate.bind(this)
 
     this.handleUserFormChange = this.handleUserFormChange.bind(this)
@@ -45,6 +47,7 @@ class App extends Component {
     this.handleEditSelect = this.handleEditSelect.bind(this)
 
     this.handleCommentFormChange = this.handleCommentFormChange.bind(this)
+    this.handleSlateCommentChange = this.handleSlateCommentChange.bind(this)
     this.handleCommentFormCreate = this.handleCommentFormCreate.bind(this)
 
     this.state = {
@@ -54,11 +57,11 @@ class App extends Component {
       comments: [],
       postFormData: {
         title: '',
-        content: '',
+        content: initialValue,
       },
       commentFormData: {
         title: '',
-        content: '',
+        content: initialValue,
       },
       userFormData: {
         username: '',
@@ -75,6 +78,16 @@ class App extends Component {
       user,
       posts
     })
+  }
+
+  handleSlatePostChange({ value }) {
+    const content = value
+    this.setState(prevState => ({
+      postFormData: {
+        ...prevState.postFormData,
+        content,
+      }
+    }))
   }
 
   handlePostFormChange(e) {
@@ -110,6 +123,16 @@ class App extends Component {
         [name]: value
       }
     }));
+  }
+
+  handleSlateCommentChange({ value }) {
+    const content = value
+    this.setState(prevState => ({
+      commentFormData: {
+        ...prevState.commentFormData,
+        content,
+      }
+    }))
   }
 
   async handleCommentFormCreate(e){
@@ -241,6 +264,7 @@ class App extends Component {
 
       postViewCheck,
       handlePostFormChange,
+      handleSlatePostChange,
       handlePostFormCreate,
 
       handleUserFormChange,
@@ -252,6 +276,7 @@ class App extends Component {
       handleDeleteUser,
 
       handleCommentFormChange,
+      handleSlateCommentChange,
       handleCommentFormCreate,
     } = this
 
@@ -280,6 +305,7 @@ class App extends Component {
           posts={posts}
           postFormData={postFormData}
           handlePostFormChange={handlePostFormChange}
+          handleSlatePostChange={handleSlatePostChange}
           handlePostFormCreate={handlePostFormCreate}
 
           userFormData={userFormData}
@@ -295,6 +321,7 @@ class App extends Component {
           postViewCheck={postViewCheck}
           commentFormData={commentFormData}
           handleCommentFormChange={handleCommentFormChange}
+          handleSlateCommentChange={handleSlateCommentChange}
           handleCommentFormCreate={handleCommentFormCreate}
         />
       </div>
