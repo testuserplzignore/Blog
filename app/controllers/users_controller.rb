@@ -43,8 +43,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    puts 'hello there general kenobi'
+    puts user_params
     new_user = User.new(user_params)
-    if new_user.valid?
+    if new_user.valid?!
       new_user.save!
       user_data = {
         id: new_user.id,
@@ -61,12 +63,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if current_user.id == @user.id
       if @user.update(user_params)
-        render json: @user, status: :ok
+        render json: {user: @user, token: gen_token(@user.id)}, status: :ok
       else
         render json: { errors: @user.errors }, status: :unprocessable_entity
       end
+    else
+      render json: {status: :unauthorized}
     end
-    render json: {status: :unauthorized}
   end
 
   def destroy
@@ -74,8 +77,9 @@ class UsersController < ApplicationController
     if current_user.id == @user.id
       @user.destroy
       head 204
+    else
+      render json: {status: :unauthorized}
     end
-    render json: {status: :unauthorized}
   end
 
   private

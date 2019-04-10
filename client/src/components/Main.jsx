@@ -13,6 +13,8 @@ const Main = props => {
     handleUserFormChange,
     handleUserFormCreate,
     handleLogin,
+    handleEditSelect,
+    handleUpdateUser,
     handleDeleteUser,
 
     posts,
@@ -62,7 +64,12 @@ const Main = props => {
       <Route path='/profile' render={props => (
         <UserProfile
           {...props}
+          user={user}
+          userFormData={userFormData}
+          handleUserFormChange={handleUserFormChange}
           handleDeleteUser={handleDeleteUser}
+          handleEditSelect={handleEditSelect}
+          handleUpdateUser={handleUpdateUser}
         />
       )} />
 

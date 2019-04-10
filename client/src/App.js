@@ -20,6 +20,7 @@ import {
   createUser,
   loginUser,
   deleteUser,
+  updateUser,
   verifyToken,
 } from './services/users'
 
@@ -39,7 +40,9 @@ class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.handleUpdateUser = this.handleUpdateUser.bind(this)
     this.handleDeleteUser = this.handleDeleteUser.bind(this)
+    this.handleEditSelect = this.handleEditSelect.bind(this)
 
     this.handleCommentFormChange = this.handleCommentFormChange.bind(this)
     this.handleCommentFormCreate = this.handleCommentFormCreate.bind(this)
@@ -141,6 +144,7 @@ class App extends Component {
     const user = await createUser(userFormData)
     console.log(user);
     this.setState({
+      user,
       userFormData: {
         username: '',
         email: '',
@@ -168,10 +172,45 @@ class App extends Component {
   async handleLogout(e){
     e.preventDefault()
     localStorage.removeItem('authToken')
+    await verifyToken()
     this.setState({
       user: {},
     })
    this.props.history.push('/');
+  }
+
+  async handleEditSelect(edit){
+    const { user } = this.state
+    if (!edit) {
+      this.setState({
+        userFormData: {
+          username: user.username,
+          email: user.email,
+          password: '',
+        }
+      })
+    } else {
+      this.setState({
+        userFormData: {
+          username: '',
+          email: '',
+          password: '',
+        }
+      })
+    }
+  }
+
+  async handleUpdateUser(){
+    const { user, userFormData } = this.state
+    const updatedUser = await updateUser(user.id, userFormData)
+    this.setState({
+      user: updatedUser,
+      userFormData: {
+        username: '',
+        email: '',
+        password: '',
+      }
+    })
   }
 
   async handleDeleteUser(e){
@@ -208,6 +247,8 @@ class App extends Component {
       handleUserFormCreate,
       handleLogin,
       handleLogout,
+      handleEditSelect,
+      handleUpdateUser,
       handleDeleteUser,
 
       handleCommentFormChange,
@@ -245,6 +286,8 @@ class App extends Component {
           handleUserFormChange={handleUserFormChange}
           handleUserFormCreate={handleUserFormCreate}
           handleLogin={handleLogin}
+          handleEditSelect={handleEditSelect}
+          handleUpdateUser={handleUpdateUser}
           handleDeleteUser={handleDeleteUser}
 
           post={post}

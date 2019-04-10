@@ -1,7 +1,8 @@
 import { api, updateToken } from './apiHelper'
 
 const createUser = async (user) => {
-  const resp = await api.post('/users', user)
+  console.log(user);
+  const resp = await api.post('/users', {user: user})
   updateToken(resp.data.token)
   return resp.data.user
 }
@@ -15,8 +16,16 @@ const loginUser = async (email, password) => {
   return resp.data.user
 }
 
+const updateUser = async (id, data) => {
+  console.log(id);
+  const resp = await api.put(`/users/${id}`, data)
+  updateToken(resp.data.token)
+  return resp.data.user
+}
+
 const deleteUser = async (id) => {
   const resp = await api.delete(`/users/${id}`)
+  return resp.data
 }
 
 const verifyToken = async () => {
@@ -45,5 +54,6 @@ export {
   createUser,
   verifyToken,
   loginUser,
+  updateUser,
   deleteUser,
 }

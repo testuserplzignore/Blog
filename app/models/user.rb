@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :username
 
   has_many :posts
   has_many :comments

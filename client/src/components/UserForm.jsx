@@ -5,11 +5,12 @@ const UserForm = (props) => {
     userFormData,
     handleUserFormChange,
     handleUserFormCreate,
+    handleUpdateUser,
     handleLogin,
   } = props
 
   return (
-    <form onSubmit={handleUserFormCreate || handleLogin}>
+    <form onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}>
       {!handleLogin &&
         <input
         type='text'
