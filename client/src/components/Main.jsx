@@ -4,12 +4,16 @@ import { Route } from 'react-router-dom'
 import PostIndex from './PostIndex'
 import PostView from './PostView'
 import UserForm from './UserForm'
+import UserProfile from './UserProfile'
 
 const Main = props => {
   const {
+    user,
     userFormData,
     handleUserFormChange,
     handleUserFormCreate,
+    handleLogin,
+    handleDeleteUser,
 
     posts,
     postFormData,
@@ -18,6 +22,9 @@ const Main = props => {
 
     post,
     comments,
+    commentFormData,
+    handleCommentFormChange,
+    handleCommentFormCreate,
     postViewCheck,
   } = props
 
@@ -26,6 +33,7 @@ const Main = props => {
       <Route exact path='/' render={props => (
         <PostIndex
           {...props}
+          user={user}
           posts={posts}
           postFormData={postFormData}
           handlePostFormChange={handlePostFormChange}
@@ -39,7 +47,22 @@ const Main = props => {
           userFormData={userFormData}
           handleUserFormChange={handleUserFormChange}
           handleUserFormCreate={handleUserFormCreate}
+        />
+      )} />
 
+      <Route path='/login' render={props => (
+        <UserForm
+          {...props}
+          userFormData={userFormData}
+          handleUserFormChange={handleUserFormChange}
+          handleLogin={handleLogin}
+        />
+      )} />
+
+      <Route path='/profile' render={props => (
+        <UserProfile
+          {...props}
+          handleDeleteUser={handleDeleteUser}
         />
       )} />
 
@@ -47,6 +70,9 @@ const Main = props => {
         <PostView {...props}
           post={post}
           comments={comments}
+          commentFormData={commentFormData}
+          handleCommentFormChange={handleCommentFormChange}
+          handleCommentFormCreate={handleCommentFormCreate}
           postViewCheck={postViewCheck}
         />
       )} />

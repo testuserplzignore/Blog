@@ -1,0 +1,21 @@
+form {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 20em;
+}
+
+input:not([type=submit]),
+select,
+textarea {
+  padding: .5em;
+  width: 100%;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #bdc3c7;
+  border-left: 0;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 10em;
+}

@@ -15,6 +15,10 @@ const loginUser = async (email, password) => {
   return resp.data.user
 }
 
+const deleteUser = async (id) => {
+  const resp = await api.delete(`/users/${id}`)
+}
+
 const verifyToken = async () => {
   const token = localStorage.getItem('authToken');
   if (token === null) {
@@ -41,4 +45,5 @@ export {
   createUser,
   verifyToken,
   loginUser,
+  deleteUser,
 }

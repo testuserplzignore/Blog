@@ -11,8 +11,9 @@ const CommentIndex = props => {
       <>
         {comments.map(comment => (
           <div key={comment.id}>
-          <h4>{comment.title}</h4>
-          <p>{comment.content}</p>
+            <h4>{comment.title}</h4>
+            <h5>{comment.user.username}</h5>
+            <p>{comment.content}</p>
           </div>
         ))}
       </>

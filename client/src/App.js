@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './style/header.css'
+import './style/form.css'
 import { withRouter } from 'react-router-dom'
 
 import {
@@ -11,11 +13,13 @@ import {
 
 import {
   getPostComments,
+  createComment,
 } from './services/comments'
 
 import {
   createUser,
   loginUser,
+  deleteUser,
   verifyToken,
 } from './services/users'
 
@@ -32,9 +36,16 @@ class App extends Component {
 
     this.handleUserFormChange = this.handleUserFormChange.bind(this)
     this.handleUserFormCreate = this.handleUserFormCreate.bind(this)
+
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+    this.handleDeleteUser = this.handleDeleteUser.bind(this)
+
+    this.handleCommentFormChange = this.handleCommentFormChange.bind(this)
+    this.handleCommentFormCreate = this.handleCommentFormCreate.bind(this)
 
     this.state = {
+      user: {},
       posts: [],
       post: {},
       comments: [],
@@ -55,10 +66,10 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    verifyToken()
+    const user = await verifyToken()
     const posts = await getPosts()
-
     this.setState({
+      user,
       posts
     })
   }
@@ -76,16 +87,38 @@ class App extends Component {
   async handlePostFormCreate(e){
     e.preventDefault()
     const { postFormData } = this.state
-    const postData = {
-      ...postFormData,
-      user_id:1,
-    }
-    const post = await createPost(postData)
+    const post = await createPost(postFormData)
     const posts = await getPosts()
 
     this.setState({
       posts,
       postFormData: {
+        title: '',
+        content: '',
+      },
+    })
+  }
+
+  handleCommentFormChange(e) {
+    const { name, value } = e.target;
+    this.setState(prevState =>({
+      commentFormData: {
+        ...prevState.commentFormData,
+        [name]: value
+      }
+    }));
+  }
+
+  async handleCommentFormCreate(e){
+    e.preventDefault()
+    const { commentFormData, post } = this.state
+    console.log(commentFormData);
+    const comment = await createComment(commentFormData, post.id)
+    const comments = await getPostComments(post.id)
+
+    this.setState({
+      comments,
+      commentFormData: {
         title: '',
         content: '',
       },
@@ -102,7 +135,6 @@ class App extends Component {
     }));
   }
 
-
   async handleUserFormCreate(e){
     e.preventDefault()
     const { userFormData } = this.state
@@ -115,22 +147,43 @@ class App extends Component {
         password: '',
       },
     })
+    this.props.history.push('/')
   }
 
   async handleLogin(e){
     e.preventDefault()
     const { email, password } = this.state.userFormData
     const user = await loginUser(email, password)
-    console.log(user);
     this.setState({
+      user,
       userFormData: {
         username: '',
         email: '',
         password: '',
       },
     })
+    this.props.history.push('/')
   }
 
+  async handleLogout(e){
+    e.preventDefault()
+    localStorage.removeItem('authToken')
+    this.setState({
+      user: {},
+    })
+   this.props.history.push('/');
+  }
+
+  async handleDeleteUser(e){
+    e.preventDefault()
+    localStorage.removeItem('authToken')
+    const { id } = this.state.user
+    await deleteUser(id)
+    this.setState({
+      user: {},
+    })
+    this.props.history.push('/')
+  }
 
   async postViewCheck(bandId, propId) {
     if (bandId != propId){
@@ -143,7 +196,6 @@ class App extends Component {
     }
   }
 
-
   render() {
     const {
       state,
@@ -155,8 +207,15 @@ class App extends Component {
       handleUserFormChange,
       handleUserFormCreate,
       handleLogin,
+      handleLogout,
+      handleDeleteUser,
+
+      handleCommentFormChange,
+      handleCommentFormCreate,
     } = this
+
     const {
+      user,
       userFormData,
 
       posts,
@@ -164,15 +223,19 @@ class App extends Component {
 
       post,
       comments,
+      commentFormData,
     } = state
+    console.log(state);
     return (
       <div className="App">
         <Header
-          userFormData={userFormData}
+          user={user}
           handleUserFormChange={handleUserFormChange}
-          handleLogin={handleLogin}
+          handleLogout={handleLogout}
         />
+
         <Main
+          user={user}
           posts={posts}
           postFormData={postFormData}
           handlePostFormChange={handlePostFormChange}
@@ -181,10 +244,15 @@ class App extends Component {
           userFormData={userFormData}
           handleUserFormChange={handleUserFormChange}
           handleUserFormCreate={handleUserFormCreate}
+          handleLogin={handleLogin}
+          handleDeleteUser={handleDeleteUser}
 
           post={post}
           comments={comments}
           postViewCheck={postViewCheck}
+          commentFormData={commentFormData}
+          handleCommentFormChange={handleCommentFormChange}
+          handleCommentFormCreate={handleCommentFormCreate}
         />
       </div>
     );

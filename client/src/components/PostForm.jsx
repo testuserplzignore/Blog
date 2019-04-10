@@ -16,7 +16,7 @@ const PostForm = props => {
         onChange={handleChange}
       />
 
-      <input
+      <textarea
         type='textarea'
         name='content'
         placeholder='Post body'

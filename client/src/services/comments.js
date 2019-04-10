@@ -5,6 +5,12 @@ const getPostComments = async (id) => {
   return resp.data
 }
 
+const createComment = async (comment, postId) => {
+  const resp = await api.post(`/posts/${postId}/comments`, comment)
+  return resp.data
+}
+
 export {
   getPostComments,
+  createComment,
 }

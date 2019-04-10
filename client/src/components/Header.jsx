@@ -1,22 +1,34 @@
 import React from 'react'
 import UserForm from './UserForm'
+import { withRouter } from 'react-router-dom'
 
 const Header = props => {
   const {
-    userFormData,
-    handleUserFormChange,
-    handleLogin
+    user,
+    handleLogin,
+    handleLogout,
   } = props
   return (
-    <>
-      <h1>dicks</h1>
-      <UserForm
-        userFormData={userFormData}
-        handleUserFormChange={handleUserFormChange}
-        handleLogin={handleLogin}
-      />
-    </>
+    <div className='navbar'>
+      <button className='home' onClick={()=>props.history.push('/')}>Home</button>
+      <div className='dropdown'>
+        <button className='dropbtn'>User</button>
+        <div className='dropdown-content'>
+          {user.id ? (
+            <>
+              <button className='mediabtn' onClick={()=>props.history.push('/profile')}>profile</button>
+              <button className='mediabtn' onClick={handleLogout}>Logout</button>
+            </>
+          ):(
+            <>
+              <button className='mediabtn' onClick={()=>props.history.push('/register')}>Register</button>
+              <button className='mediabtn' onClick={()=>props.history.push('/login')}>Login</button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default Header
+export default withRouter(Header)

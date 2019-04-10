@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   skip_before_action :ensure_signed_in, only: [:index, :show]
-  
+
   def index
     @posts = Post.all
-    render json: @posts
+    render json: @posts, include: :user
   end
 
   def show
@@ -12,27 +12,45 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.save!
-      render json: @post
+    if current_user.id == 1
+      post_data ={
+        user_id: 1,
+        title: post_params['title'],
+        content: post_params['content'],
+
+      }
+      @post = Post.new(post_data)
+      if @post.save!
+        render json: @post
+      else
+        render json: { errors: @post.errors }, status: :unprocessable_entity
+      end
     else
-      render json: { errors: @post.errors }, status: :unprocessable_entity
+      render json: {status: :unauthorized}
     end
   end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
-      render json: @post, status: :ok
+    if current_user.id == 1
+      @post = Post.find(params[:id])
+      if @post.update(post_params)
+        render json: @post, status: :ok
+      else
+        render json: { errors: @post.errors }, status: :unprocessable_entity
+      end
     else
-      render json: { errors: @post.errors }, status: :unprocessable_entity
+      render json: {status: :unauthorized}
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    if current_user.id == 1
+      @post = Post.find(params[:id])
+      @post.destroy
     head 204
+    else
+      render json: {status: :unauthorized}
+    end
   end
 
   private

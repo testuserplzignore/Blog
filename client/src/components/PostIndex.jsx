@@ -5,6 +5,7 @@ import PostForm from './PostForm'
 
 const PostIndex = props => {
   const {
+    user,
     posts,
     postFormData,
     handlePostFormChange,
@@ -14,14 +15,15 @@ const PostIndex = props => {
 
   return (
     <>
-      <PostForm
+      {user.id == 1 && <PostForm
         postFormData={postFormData}
         handleChange={handlePostFormChange}
         handleSubmit={handlePostFormCreate}
-      />
+      />}
       {posts.map(post => (
         <div key={post.id}>
           <h2>{post.title}</h2>
+          <h3>{post.user.username}</h3>
           <button onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>
         </div>
       ))}

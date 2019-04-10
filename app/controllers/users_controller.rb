@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     else
       render json: {
         user: {
+          id: user.id,
           username: user.username,
           email: user.email,
           authorization: user.authorization
@@ -28,7 +29,12 @@ class UsersController < ApplicationController
 
   def verify
     ensure_signed_in
-    render json: { user: current_user }
+    user_data = {
+      id: current_user.id,
+      username: current_user.username,
+      email: current_user.email,
+    }
+    render json: user_data
   end
 
   def show
@@ -37,19 +43,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      render json: @user
-    else
-      render json: { errors: @user.errors }, status: :unprocessable_entity
-    end
-  end
-
-  def create
     new_user = User.new(user_params)
     if new_user.valid?
       new_user.save!
       user_data = {
+        id: new_user.id,
         username: new_user.username,
         email: new_user.email,
       }
@@ -61,17 +59,23 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      render json: @user, status: :ok
-    else
-      render json: { errors: @user.errors }, status: :unprocessable_entity
+    if current_user.id == @user.id
+      if @user.update(user_params)
+        render json: @user, status: :ok
+      else
+        render json: { errors: @user.errors }, status: :unprocessable_entity
+      end
     end
+    render json: {status: :unauthorized}
   end
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    head 204
+    if current_user.id == @user.id
+      @user.destroy
+      head 204
+    end
+    render json: {status: :unauthorized}
   end
 
   private
