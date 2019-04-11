@@ -9,6 +9,8 @@ const PostIndex = props => {
     posts,
     postFormData,
     handlePostFormChange,
+    handleSlatePostChange,
+    postHasMark,
     handlePostFormCreate,
   } = props
 
@@ -16,12 +18,14 @@ const PostIndex = props => {
   return (
     <>
       {user.id == 1 && <PostForm
-        postFormData={postFormData}
+        formData={postFormData}
         handleChange={handlePostFormChange}
+        handleSlateChange={handleSlatePostChange}
+        hasMark={postHasMark}
         handleSubmit={handlePostFormCreate}
       />}
       {posts.map(post => (
-        <div key={post.id}>
+        <div className='post' key={post.id}>
           <h2>{post.title}</h2>
           <h3>{post.user.username}</h3>
           <button onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>

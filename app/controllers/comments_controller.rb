@@ -11,8 +11,8 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     puts comment_params
     new_comment = {
-      title: comment_params[:title],
-      content: comment_params[:content],
+      title: comment_params['title'],
+      content: comment_params['content'],
       user_id: current_user.id,
     }
     @comment = @post.comments.new(new_comment)

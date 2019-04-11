@@ -1,6 +1,7 @@
 import React from 'react'
 import CommentIndex from './CommentIndex'
 import PostForm from './PostForm'
+import SlateReadOnly from './slate/SlateReadOnly'
 
 const PostView = props => {
   const {
@@ -9,6 +10,8 @@ const PostView = props => {
     postViewCheck,
     commentFormData,
     handleCommentFormChange,
+    handleSlateCommentChange,
+    commentHasMark,
     handleCommentFormCreate,
   } = props
 
@@ -16,11 +19,17 @@ const PostView = props => {
   return (
     <>
       <h2>{post.title}</h2>
-      <p>{post.content}</p>
+      {post.content && <SlateReadOnly
+        post={JSON.parse(post.content)}
+      />}
+
+
       <PostForm
-      postFormData={commentFormData}
-      handleChange={handleCommentFormChange}
-      handleSubmit={handleCommentFormCreate}
+        formData={commentFormData}
+        handleChange={handleCommentFormChange}
+        handleSlateChange={handleSlateCommentChange}
+        hasMark={commentHasMark}
+        handleSubmit={handleCommentFormCreate}
       />
       <CommentIndex comments={comments} />
     </>
