@@ -1,6 +1,7 @@
 import React from 'react'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
+import SlateEditor from './slate/SlateEditor'
 import {
   plugins,
   initialValue,
@@ -24,19 +25,9 @@ const PostForm = props => {
         onChange={handleChange}
       />
 
-      <Editor
-        plugins={plugins}
+      <SlateEditor
         value={formData.content}
-        onChange={handleSlateChange}
-        renderMark={renderMark}
-      />
-
-      <textarea
-        type='textarea'
-        name='content'
-        placeholder='Post body'
-        value={formData.content}
-        onChange={handleChange}
+        handleChange={handleSlateChange}
       />
 
       <input type='submit' onSubmit={handleSubmit} />

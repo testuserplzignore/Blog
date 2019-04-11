@@ -103,14 +103,18 @@ class App extends Component {
   async handlePostFormCreate(e){
     e.preventDefault()
     const { postFormData } = this.state
-    const post = await createPost(postFormData)
+    const postObj = {
+      title: postFormData.title,
+      content: JSON.stringify(postFormData.content.toJSON())
+    }
+    const post = await createPost(postObj)
     const posts = await getPosts()
 
     this.setState({
       posts,
       postFormData: {
         title: '',
-        content: '',
+        content: initialValue,
       },
     })
   }
@@ -138,15 +142,19 @@ class App extends Component {
   async handleCommentFormCreate(e){
     e.preventDefault()
     const { commentFormData, post } = this.state
-    console.log(commentFormData);
-    const comment = await createComment(commentFormData, post.id)
+    const commentObj = {
+      title: commentFormData.title,
+      content: JSON.stringify(commentFormData.content.toJSON())
+    }
+    console.log(commentObj);
+    const comment = await createComment(commentObj, post.id)
     const comments = await getPostComments(post.id)
-
+    console.log(comment);
     this.setState({
       comments,
       commentFormData: {
         title: '',
-        content: '',
+        content: initialValue,
       },
     })
   }

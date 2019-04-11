@@ -1,21 +1,26 @@
 form {
   margin-right: auto;
   margin-left: auto;
-  max-width: 20em;
+  max-width: 40em;
 }
 
 input:not([type=submit]),
 select,
-textarea {
+textarea,
+.editor {
+  margin: 2em 1em;
+  max-width: 40em;
   padding: .5em;
   width: 100%;
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid #bdc3c7;
   border-left: 0;
+  box-shadow: 5px 10px 20px;
 }
 
-textarea {
+textarea,
+.editor {
   resize: vertical;
   min-height: 10em;
 }

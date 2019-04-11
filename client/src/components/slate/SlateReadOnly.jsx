@@ -12,6 +12,7 @@ const ReadOnly = props => {
   const { post } = props
   return (
     <Editor
+      className='editor'
       value={Value.fromJSON(post)}
       renderMark={renderMark}
       readOnly
