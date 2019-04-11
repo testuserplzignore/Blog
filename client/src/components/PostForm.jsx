@@ -13,6 +13,7 @@ const PostForm = props => {
     formData,
     handleChange,
     handleSlateChange,
+    hasMark,
     handleSubmit,
   } = props
   return(
@@ -28,6 +29,7 @@ const PostForm = props => {
       <SlateEditor
         value={formData.content}
         handleChange={handleSlateChange}
+        hasMark={hasMark}
       />
 
       <input type='submit' onSubmit={handleSubmit} />

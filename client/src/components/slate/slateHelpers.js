@@ -24,23 +24,6 @@ const initialValue = Value.fromJSON(
   }
 )
 
-const renderMark = (props, editor, next) => {
-  switch (props.mark.type) {
-    case 'bold':
-      return <strong>{props.children}</strong>
-    case 'code':
-      return <code>{props.children}</code>
-    case 'italic':
-      return <em>{props.children}</em>
-    case 'strikethrough':
-      return <del>{props.children}</del>
-    case 'underline':
-      return <u>{props.children}</u>
-    default:
-      return next()
-  }
-}
-
 function MarkHotkey(options) {
   const { type, key } = options
 
@@ -71,5 +54,4 @@ const plugins = [
 export {
   plugins,
   initialValue,
-  renderMark,
 }

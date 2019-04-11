@@ -35,6 +35,7 @@ class App extends Component {
     this.postViewCheck = this.postViewCheck.bind(this)
     this.handlePostFormChange = this.handlePostFormChange.bind(this)
     this.handleSlatePostChange = this.handleSlatePostChange.bind(this)
+    this.postHasMark = this.postHasMark.bind(this)
     this.handlePostFormCreate = this.handlePostFormCreate.bind(this)
 
     this.handleUserFormChange = this.handleUserFormChange.bind(this)
@@ -48,6 +49,7 @@ class App extends Component {
 
     this.handleCommentFormChange = this.handleCommentFormChange.bind(this)
     this.handleSlateCommentChange = this.handleSlateCommentChange.bind(this)
+    this.commentHasMark = this.commentHasMark.bind(this)
     this.handleCommentFormCreate = this.handleCommentFormCreate.bind(this)
 
     this.state = {
@@ -90,6 +92,11 @@ class App extends Component {
     }))
   }
 
+  postHasMark(type) {
+    const { postFormData: { content } } = this.state
+    return content.activeMarks.some(mark => mark.type === type)
+  }
+
   handlePostFormChange(e) {
     const { name, value } = e.target;
     this.setState(prevState =>({
@@ -129,6 +136,11 @@ class App extends Component {
     }));
   }
 
+  commentHasMark(type) {
+    const { commentFormData: { content } } = this.state
+    return content.activeMarks.some(mark => mark.type === type)
+  }
+
   handleSlateCommentChange({ value }) {
     const content = value
     this.setState(prevState => ({
@@ -146,10 +158,8 @@ class App extends Component {
       title: commentFormData.title,
       content: JSON.stringify(commentFormData.content.toJSON())
     }
-    console.log(commentObj);
     const comment = await createComment(commentObj, post.id)
     const comments = await getPostComments(post.id)
-    console.log(comment);
     this.setState({
       comments,
       commentFormData: {
@@ -173,7 +183,6 @@ class App extends Component {
     e.preventDefault()
     const { userFormData } = this.state
     const user = await createUser(userFormData)
-    console.log(user);
     this.setState({
       user,
       userFormData: {
@@ -273,6 +282,7 @@ class App extends Component {
       postViewCheck,
       handlePostFormChange,
       handleSlatePostChange,
+      postHasMark,
       handlePostFormCreate,
 
       handleUserFormChange,
@@ -285,6 +295,7 @@ class App extends Component {
 
       handleCommentFormChange,
       handleSlateCommentChange,
+      commentHasMark,
       handleCommentFormCreate,
     } = this
 
@@ -299,7 +310,6 @@ class App extends Component {
       comments,
       commentFormData,
     } = state
-    console.log(state);
     return (
       <div className="App">
         <Header
@@ -314,6 +324,7 @@ class App extends Component {
           postFormData={postFormData}
           handlePostFormChange={handlePostFormChange}
           handleSlatePostChange={handleSlatePostChange}
+          postHasMark={postHasMark}
           handlePostFormCreate={handlePostFormCreate}
 
           userFormData={userFormData}
@@ -330,6 +341,7 @@ class App extends Component {
           commentFormData={commentFormData}
           handleCommentFormChange={handleCommentFormChange}
           handleSlateCommentChange={handleSlateCommentChange}
+          commentHasMark={commentHasMark}
           handleCommentFormCreate={handleCommentFormCreate}
         />
       </div>

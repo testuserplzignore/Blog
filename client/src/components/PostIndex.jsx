@@ -10,6 +10,7 @@ const PostIndex = props => {
     postFormData,
     handlePostFormChange,
     handleSlatePostChange,
+    postHasMark,
     handlePostFormCreate,
   } = props
 
@@ -20,6 +21,7 @@ const PostIndex = props => {
         formData={postFormData}
         handleChange={handlePostFormChange}
         handleSlateChange={handleSlatePostChange}
+        hasMark={postHasMark}
         handleSubmit={handlePostFormCreate}
       />}
       {posts.map(post => (

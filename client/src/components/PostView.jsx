@@ -11,6 +11,7 @@ const PostView = props => {
     commentFormData,
     handleCommentFormChange,
     handleSlateCommentChange,
+    commentHasMark,
     handleCommentFormCreate,
   } = props
 
@@ -21,11 +22,13 @@ const PostView = props => {
       {post.content && <SlateReadOnly
         post={JSON.parse(post.content)}
       />}
-      
+
+
       <PostForm
         formData={commentFormData}
         handleChange={handleCommentFormChange}
         handleSlateChange={handleSlateCommentChange}
+        hasMark={commentHasMark}
         handleSubmit={handleCommentFormCreate}
       />
       <CommentIndex comments={comments} />
