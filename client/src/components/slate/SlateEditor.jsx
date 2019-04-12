@@ -24,9 +24,10 @@ class SlateEditor extends Component {
 
   renderMarkButton = (type, icon) => {
     const isActive = this.props.hasMark(type)
-    console.log(isActive);
+
     return (
       <button
+        className={isActive ? 'slateButton-active' : 'slateButton'}
         onMouseDown={event =>this.onClickMark(event, type)}
       >
         <div className='icon'>{icon}</div>
@@ -76,10 +77,10 @@ class SlateEditor extends Component {
     return (
       <>
         <div className = 'toolbar'>
-          {this.renderMarkButton('bold', 'format_bold')}
-          {this.renderMarkButton('italic', 'format_italic')}
-          {this.renderMarkButton('underlined', 'format_underlined')}
-          {this.renderMarkButton('code', 'code')}
+          {this.renderMarkButton('bold', <strong>B</strong>)}
+          {this.renderMarkButton('italic', <em>I</em>)}
+          {this.renderMarkButton('underlined', <u>U</u>)}
+          {this.renderMarkButton('code', <code>`</code>)}
         </div>
         <Editor
           spellcheck

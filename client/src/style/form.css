@@ -16,11 +16,31 @@ textarea,
   border-right: 0;
   border-bottom: 1px solid #bdc3c7;
   border-left: 0;
-  box-shadow: 5px 10px 20px;
+  box-shadow: 2px 5px 20px;
 }
 
 textarea,
 .editor {
   resize: vertical;
   min-height: 10em;
+}
+
+.slateButton {
+  margin: .3em;
+  padding: .5em .5em;
+  min-width: 2em;
+  background-color: WhiteSmoke;
+  color: black;
+  cursor: pointer;
+  box-shadow: 2px 5px 20px;
+}
+
+.slateButton-active {
+  margin: .3em;
+  padding: .5em .5em;
+  min-width: 2em;
+  background-color: WhiteSmoke;
+  color: black;
+  cursor: pointer;
+  box-shadow: 2px 5px 7px;
 }
