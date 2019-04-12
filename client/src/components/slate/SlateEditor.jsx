@@ -4,7 +4,10 @@ import { Value } from 'slate'
 
 import { createPost } from '../../services/posts'
 import {
-  plugins,
+  isBoldHotkey,
+  isItalicHotkey,
+  isUnderlinedHotkey,
+  isCodeHotkey,
   initialValue,
 } from './slateHelpers'
 
@@ -21,14 +24,31 @@ class SlateEditor extends Component {
 
   renderMarkButton = (type, icon) => {
     const isActive = this.props.hasMark(type)
+    console.log(isActive);
     return (
       <button
-        active={`${isActive}`}
-        onClick={event => this.onClickMark(event, type)}
+        onMouseDown={event =>this.onClickMark(event, type)}
       >
         <div className='icon'>{icon}</div>
       </button>
     )
+  }
+
+  onKeyDown = (event, editor, next) => {
+    let mark
+    if (isBoldHotkey(event)) {
+      mark = 'bold'
+    } else if (isItalicHotkey(event)) {
+      mark = 'italic'
+    } else if (isUnderlinedHotkey(event)) {
+      mark = 'underlined'
+    } else if (isCodeHotkey(event)) {
+      mark = 'code'
+    } else {
+      return next()
+    }
+    event.preventDefault()
+    editor.toggleMark(mark)
   }
 
   renderMark = (props, editor, next) => {
@@ -55,20 +75,22 @@ class SlateEditor extends Component {
     } = this.props
     return (
       <>
-      <div className = 'toolbar'>
-        {this.renderMarkButton('bold', 'format_bold')}
-        {this.renderMarkButton('italic', 'format_italic')}
-        {this.renderMarkButton('underlined', 'format_underlined')}
-        {this.renderMarkButton('code', 'code')}
-      </div>
-      <Editor
-        className='editor'
-        plugins={plugins}
-        value={value}
-        ref={this.ref}
-        onChange={handleChange}
-        renderMark={this.renderMark}
-      />
+        <div className = 'toolbar'>
+          {this.renderMarkButton('bold', 'format_bold')}
+          {this.renderMarkButton('italic', 'format_italic')}
+          {this.renderMarkButton('underlined', 'format_underlined')}
+          {this.renderMarkButton('code', 'code')}
+        </div>
+        <Editor
+          spellcheck
+          autoFocus
+          className='editor'
+          value={value}
+          ref={this.ref}
+          onChange={handleChange}
+          onKeyDown={this.onKeyDown}
+          renderMark={this.renderMark}
+        />
       </>
     )
   }

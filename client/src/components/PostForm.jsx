@@ -2,6 +2,7 @@ import React from 'react'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
 import SlateEditor from './slate/SlateEditor'
+import '../style/form.css'
 import {
   plugins,
   initialValue,
@@ -17,7 +18,7 @@ const PostForm = props => {
     handleSubmit,
   } = props
   return(
-    <form onSubmit={handleSubmit}>
+    <div className='form'>
       <input
         type='text'
         name='title'
@@ -32,8 +33,8 @@ const PostForm = props => {
         hasMark={hasMark}
       />
 
-      <input type='submit' onSubmit={handleSubmit} />
-    </form>
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
   )
 }
 

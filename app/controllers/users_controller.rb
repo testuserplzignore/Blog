@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   def login
     email = params[:email]
     password = params[:password]
-    puts 'hello', email
 
     user = User.find_by_credentials email, password
     if user.nil?

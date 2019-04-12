@@ -21,34 +21,34 @@ users = User.create(
   ]
 )
 
-posts = Post.create(
-  [
-    {
-      title: 'inoffensive title',
-      content: 'My favorite things',
-      user_id: 1,
-    },
-    {
-      title: 'more inoffensive',
-      content: 'meant to list this with the others but I forgot',
-      user_id: 1,
-    },
-  ]
-)
-
-comments = Comment.create(
-  [
-    {
-      title: 'inoffensive comment',
-      content: 'inoffensive content',
-      user_id: 2,
-      post_id: 1,
-    },
-    {
-      title: 'good point',
-      content: "I'll make a new post",
-      user_id: 1,
-      post_id: 1,
-    },
-  ]
-)
+# posts = Post.create(
+#   [
+#     {
+#       title: 'inoffensive title',
+#       content: 'My favorite things',
+#       user_id: 1,
+#     },
+#     {
+#       title: 'more inoffensive',
+#       content: 'meant to list this with the others but I forgot',
+#       user_id: 1,
+#     },
+#   ]
+# )
+#
+# comments = Comment.create(
+#   [
+#     {
+#       title: 'inoffensive comment',
+#       content: 'inoffensive content',
+#       user_id: 2,
+#       post_id: 1,
+#     },
+#     {
+#       title: 'good point',
+#       content: "I'll make a new post",
+#       user_id: 1,
+#       post_id: 1,
+#     },
+#   ]
+# )

@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   skip_before_action :ensure_signed_in, only: [:index, :show]
 
   def index
-    @posts = Post.all
-    render json: @posts, include: :user
+    @posts = Post.includes(:user).all
+    render json: @posts
   end
 
   def show

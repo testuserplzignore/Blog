@@ -1,5 +1,6 @@
 import React from 'react'
 import { Value } from 'slate'
+import { isKeyHotkey } from 'is-hotkey'
 
 const initialValue = Value.fromJSON(
   {
@@ -42,16 +43,16 @@ function MarkHotkey(options) {
   }
 }
 
-const plugins = [
-  MarkHotkey({ key: 'b', type: 'bold' }),
-  MarkHotkey({ key: 'c', type: 'code' }),
-  MarkHotkey({ key: 'i', type: 'italic' }),
-  MarkHotkey({ key: 's', type: 'strikethrough' }),
-  MarkHotkey({ key: 'u', type: 'underline' }),
-]
+const isBoldHotkey = isKeyHotkey('mod+b')
+const isItalicHotkey = isKeyHotkey('mod+i')
+const isUnderlinedHotkey = isKeyHotkey('mod+u')
+const isCodeHotkey = isKeyHotkey('mod+`')
 
 
 export {
-  plugins,
+  isBoldHotkey,
+  isItalicHotkey,
+  isUnderlinedHotkey,
+  isCodeHotkey,
   initialValue,
 }

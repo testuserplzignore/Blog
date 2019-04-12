@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import './style/header.css'
-import './style/form.css'
 import { withRouter } from 'react-router-dom'
 import { initialValue } from './components/slate/slateHelpers'
 
@@ -310,6 +309,7 @@ class App extends Component {
       comments,
       commentFormData,
     } = state
+    console.log(postFormData);
     return (
       <div className="App">
         <Header
