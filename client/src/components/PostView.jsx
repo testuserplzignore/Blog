@@ -3,7 +3,7 @@ import CommentIndex from './CommentIndex'
 import PostForm from './PostForm'
 import SlateReadOnly from './slate/SlateReadOnly'
 
-const PostView = props => {
+const PostView = (props) => {
   const {
     post,
     comments,

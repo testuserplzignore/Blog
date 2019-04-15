@@ -40,7 +40,6 @@ const verifyToken = async () => {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log(token);
       updateToken(token);
       return resp.data;
     } catch (e) {

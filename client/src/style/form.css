@@ -25,6 +25,12 @@ textarea,
   min-height: 10em;
 }
 
+code {
+  background-color: lightgray;
+  min-width: 100%;
+  display: block;
+}
+
 .slateButton {
   margin: .3em;
   padding: .5em .5em;

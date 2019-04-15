@@ -263,8 +263,8 @@ class App extends Component {
     this.props.history.push('/')
   }
 
-  async postViewCheck(bandId, propId) {
-    if (bandId != propId){
+  async postViewCheck(postId, propId) {
+    if (postId != propId){
       const post = await getPost(parseInt(propId))
       const comments = await getPostComments(parseInt(propId))
       this.setState({
