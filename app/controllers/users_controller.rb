@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
   def gen_token(user_id)
     payload = {id: user_id}
-    JWT.encode(payload, Rails.application.credentials.auth_secret)
+    puts payload
+    JWT.encode!(payload, Rails.application.credentials.secret_key_base)
   end
 
   def login
