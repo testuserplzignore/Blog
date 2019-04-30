@@ -2,6 +2,7 @@
 
 ## Project Overview
 I am making a blog so I have my own piece of internet from which to yell at the clouds
+preview: ritzy-friends.surge.sh
 
 ## User stories
 A user should be able to visit the blog, post a comment on a post made by the blogger, as either a guest or registered user
