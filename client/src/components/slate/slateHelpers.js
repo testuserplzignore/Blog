@@ -46,7 +46,7 @@ function MarkHotkey(options) {
 const isBoldHotkey = isKeyHotkey('mod+b')
 const isItalicHotkey = isKeyHotkey('mod+i')
 const isUnderlinedHotkey = isKeyHotkey('mod+u')
-const isCodeHotkey = isKeyHotkey('mod+`')
+const isCodeHotkey = isKeyHotkey('mod+c')
 
 
 export {

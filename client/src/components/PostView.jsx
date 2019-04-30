@@ -18,7 +18,7 @@ const PostView = (props) => {
   postViewCheck(post.id, props.match.params.id)
   return (
     <>
-      <h2>{post.title}</h2>
+      <h1 className='title'>{post.title}</h1>
       {post.content && <SlateReadOnly
         post={JSON.parse(post.content)}
       />}

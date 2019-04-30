@@ -11,9 +11,9 @@ const CommentIndex = props => {
     {comments &&
       <>
         {comments.map(comment => (
-          <div key={comment.id}>
-            <h4>{comment.title}</h4>
-            <h5>{comment.user.username}</h5>
+          <div key={comment.id} className='post'>
+            <h4 className='title'>{comment.title}</h4>
+            <h5 className='title'>{comment.user.username}</h5>
             {comment.content && <SlateReadOnly
               post={JSON.parse(comment.content)}
             />}

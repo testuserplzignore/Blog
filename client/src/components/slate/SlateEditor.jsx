@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
+import Code from "@convertkit/slate-code"
 
 import { createPost } from '../../services/posts'
 import {
@@ -10,6 +11,16 @@ import {
   isCodeHotkey,
   initialValue,
 } from './slateHelpers'
+
+const plugins = [Code({
+  highlight: true,
+  block: "code",
+  line: "code-line",
+  classNames: {
+    block: "code",
+    line: "code-line"
+  }
+})]
 
 class SlateEditor extends Component {
 
@@ -86,6 +97,7 @@ class SlateEditor extends Component {
           spellcheck
           autoFocus
           className='editor'
+          plugins={plugins}
           value={value}
           ref={this.ref}
           onChange={handleChange}

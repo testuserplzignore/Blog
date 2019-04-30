@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://boiling-tundra-50188.herokuapp.com',
   contentType: 'application/json',
   dataType: "json",
 })

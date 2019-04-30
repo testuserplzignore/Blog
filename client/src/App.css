@@ -5,6 +5,11 @@
   transition: 250ms;
 }
 
+h1, h2, h3, h4, h5 {
+  box-shadow: 2px 5px 20px;
+  background-color: white;
+}
+
 button,
 input[type=submit] {
   background-color: black;
@@ -15,9 +20,9 @@ input[type=submit] {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  box-shadow: 2px 5px 20px black;
 }
 
 .post {
-  width: 80%;
-  margin: 0 auto;
+  margin-bottom: 8rem;
 }
