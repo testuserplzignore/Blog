@@ -1,24 +1,11 @@
-# README
+# Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project Overview
+I am making a blog so I have my own piece of internet from which to yell at the clouds
 
-Things you may want to cover:
+## User stories
+A user should be able to visit the blog, post a comment on a post made by the blogger, as either a guest or registered user
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## technologies
+MVP - rails, react, bcrypt, axios etc. standard tech stack introduced during the course
+post MVP - Slate JS (react based WYSIWYG editor framework), Oauth 2.0 
