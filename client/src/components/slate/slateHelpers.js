@@ -25,6 +25,16 @@ const initialValue = Value.fromJSON(
   }
 )
 
+function SoftBreak(options = {}) {
+  return {
+    onKeyDown(event, change, next) {
+      if (event.key !== 'Enter') return next()
+      if (options.shift && event.shiftKey === true) return next()
+      return change.insertText('\n')
+    },
+  }
+}
+
 function MarkHotkey(options) {
   const { type, key } = options
 
@@ -50,6 +60,7 @@ const isCodeHotkey = isKeyHotkey('mod+c')
 
 
 export {
+  SoftBreak,
   isBoldHotkey,
   isItalicHotkey,
   isUnderlinedHotkey,

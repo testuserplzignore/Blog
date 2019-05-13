@@ -12,6 +12,7 @@ const PostView = (props) => {
     handleCommentFormChange,
     handleSlateCommentChange,
     commentHasMark,
+    commentHasBlock,
     handleCommentFormCreate,
   } = props
 
@@ -29,6 +30,7 @@ const PostView = (props) => {
         handleChange={handleCommentFormChange}
         handleSlateChange={handleSlateCommentChange}
         hasMark={commentHasMark}
+        hasBlock={commentHasBlock}
         handleSubmit={handleCommentFormCreate}
       />
       <CommentIndex comments={comments} />

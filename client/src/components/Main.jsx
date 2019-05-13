@@ -22,6 +22,7 @@ const Main = props => {
     handlePostFormChange,
     handleSlatePostChange,
     postHasMark,
+    postHasBlock,
     handlePostFormCreate,
 
     post,
@@ -30,6 +31,7 @@ const Main = props => {
     handleCommentFormChange,
     handleSlateCommentChange,
     commentHasMark,
+    commentHasBlock,
     handleCommentFormCreate,
     postViewCheck,
   } = props
@@ -45,6 +47,7 @@ const Main = props => {
           handlePostFormChange={handlePostFormChange}
           handleSlatePostChange={handleSlatePostChange}
           postHasMark={postHasMark}
+          postHasBlock={postHasBlock}
           handlePostFormCreate={handlePostFormCreate}
         />
       )} />
@@ -86,6 +89,7 @@ const Main = props => {
           commentFormData={commentFormData}
           handleCommentFormChange={handleCommentFormChange}
           handleSlateCommentChange={handleSlateCommentChange}
+          commentHasBlock={commentHasBlock}
           commentHasMark={commentHasMark}
           handleCommentFormCreate={handleCommentFormCreate}
           postViewCheck={postViewCheck}

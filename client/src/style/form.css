@@ -31,10 +31,13 @@ textarea,
   padding: .5em;
 }
 
+pre {
+  background-color: lightgray;
+  overflow-x: scroll;
+}
+
 code {
   background-color: lightgray;
-  min-width: 100%;
-  display: block;
 }
 
 .slateButton {

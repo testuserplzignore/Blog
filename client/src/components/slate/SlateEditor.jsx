@@ -5,6 +5,7 @@ import Code from "@convertkit/slate-code"
 
 import { createPost } from '../../services/posts'
 import {
+  SoftBreak,
   isBoldHotkey,
   isItalicHotkey,
   isUnderlinedHotkey,
@@ -12,15 +13,20 @@ import {
   initialValue,
 } from './slateHelpers'
 
-const plugins = [Code({
-  highlight: true,
-  block: "code",
-  line: "code-line",
-  classNames: {
+const plugins = [
+  Code({
+    highlight: true,
     block: "code",
-    line: "code-line"
-  }
-})]
+    line: "code-line",
+    classNames: {
+      block: "code",
+      line: "code-line"
+    }
+  }),
+  SoftBreak({shift: true}),
+]
+
+const DEFAULT_NODE = 'paragraph'
 
 class SlateEditor extends Component {
 
@@ -40,6 +46,71 @@ class SlateEditor extends Component {
       <button
         className={isActive ? 'slateButton-active' : 'slateButton'}
         onMouseDown={event =>this.onClickMark(event, type)}
+      >
+        <div className='icon'>{icon}</div>
+      </button>
+    )
+  }
+
+  onClickBlock = (event, type) => {
+    event.preventDefault()
+
+    const { editor } = this
+    const { value } = editor
+    const { document } = value
+
+    if (type !== 'bulleted-list' && type !== 'numbered-list') {
+      const isActive = this.props.hasBlock(type)
+      const isList = this.props.hasBlock('list-item')
+
+      if (isList) {
+        editor
+          .setBlocks(isActive ? DEFAULT_NODE : type)
+          .unwrapBlock('bulleted-list')
+          .unwrapBlock('numbered-list')
+      } else {
+        editor.setBlocks(isActive ? DEFAULT_NODE : type)
+      }
+    } else {
+      const isList = this.props.hasBlock('list-item')
+      const isType = value.blocks.some(block => {
+        return !!document.getClosest(block.key, parent => parent.type === type)
+      })
+      console.log(isType);
+
+      if (isList && isType) {
+        editor
+          .setBlocks(DEFAULT_NODE)
+          .unwrapBlock('bulleted-list')
+          .unwrapBlock('numbered-list')
+      } else if (isList) {
+        editor
+          .unwrapBlock(
+            type === 'bulleted-list' ? 'numbered-list' : 'bulleted-list'
+          )
+          .wrapBlock(type)
+      } else {
+        editor.setBlocks('list-item').wrapBlock(type)
+      }
+    }
+  }
+
+  renderBlockButton = (type, icon) => {
+    let isActive = this.props.hasBlock(type)
+
+    if (['numbered-list', 'bulleted-list'].includes(type)) {
+      const { value: { document, blocks } } = this.props
+
+      if (blocks.size > 0) {
+        const parent = document.getParent(blocks.first().key)
+        isActive = this.props.hasBlock('list-item') && parent && parent.type === type
+      }
+    }
+
+    return (
+      <button
+        className={isActive ? 'slateButton-active' : 'slateButton'}
+        onMouseDown={event => this.onClickBlock(event, type)}
       >
         <div className='icon'>{icon}</div>
       </button>
@@ -80,6 +151,27 @@ class SlateEditor extends Component {
     }
   }
 
+  renderNode = (props, editor, next) => {
+    const { attributes, children, node } = props
+
+    switch (node.type) {
+      case 'block-quote':
+        return <blockquote {...attributes}>{children}</blockquote>
+      case 'bulleted-list':
+        return <ul {...attributes}>{children}</ul>
+      case 'code-block':
+        return <pre {...attributes}>{children}</pre>
+      case 'heading-two':
+        return <h2 {...attributes}>{children}</h2>
+      case 'list-item':
+        return <li {...attributes}>{children}</li>
+      case 'numbered-list':
+        return <ol {...attributes}>{children}</ol>
+      default:
+        return next()
+    }
+  }
+
   render() {
     const {
       value,
@@ -88,10 +180,19 @@ class SlateEditor extends Component {
     return (
       <>
         <div className = 'toolbar'>
-          {this.renderMarkButton('bold', <strong>B</strong>)}
-          {this.renderMarkButton('italic', <em>I</em>)}
-          {this.renderMarkButton('underlined', <u>U</u>)}
-          {this.renderMarkButton('code', <code>`</code>)}
+          <div>
+            {this.renderMarkButton('bold', <strong>B</strong>)}
+            {this.renderMarkButton('italic', <em>I</em>)}
+            {this.renderMarkButton('underlined', <u>U</u>)}
+            {this.renderMarkButton('code', <code>`</code>)}
+          </div>
+          <div>
+            {this.renderBlockButton('code-block', 'Code Block')}
+            {this.renderBlockButton('heading-two', 'Heading Two')}
+            {this.renderBlockButton('block-quote', 'Quote')}
+            {this.renderBlockButton('numbered-list', 'numbered list')}
+            {this.renderBlockButton('bulleted-list', 'bullet list')}
+          </div>
         </div>
         <Editor
           spellcheck
@@ -103,6 +204,7 @@ class SlateEditor extends Component {
           onChange={handleChange}
           onKeyDown={this.onKeyDown}
           renderMark={this.renderMark}
+          renderNode={this.renderNode}
         />
       </>
     )
