@@ -1,14 +1,14 @@
 .form {
-  margin-right: auto;
-  margin-left: auto;
   max-width: 40em;
+  margin: 0 auto;
+  margin-bottom: 8rem;
 }
 
 input:not([type=submit]),
 select,
 textarea,
 .editor {
-  margin: 2em 1em;
+  margin: 2em auto;
   max-width: 40em;
   padding: .5em;
   width: 100%;
@@ -25,10 +25,19 @@ textarea,
   min-height: 10em;
 }
 
+.title {
+  max-width: 40em;
+  margin: 1em auto;
+  padding: .5em;
+}
+
+pre {
+  background-color: lightgray;
+  overflow-x: scroll;
+}
+
 code {
   background-color: lightgray;
-  min-width: 100%;
-  display: block;
 }
 
 .slateButton {

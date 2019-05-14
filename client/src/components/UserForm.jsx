@@ -27,7 +27,7 @@ const UserForm = (props) => {
         onChange={handleUserFormChange}
       />
       <input
-        type='text'
+        type='password'
         name='password'
         placeholder='Password'
         value={userFormData.password}

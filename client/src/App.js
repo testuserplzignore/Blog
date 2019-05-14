@@ -35,6 +35,7 @@ class App extends Component {
     this.handlePostFormChange = this.handlePostFormChange.bind(this)
     this.handleSlatePostChange = this.handleSlatePostChange.bind(this)
     this.postHasMark = this.postHasMark.bind(this)
+    this.postHasBlock = this.postHasBlock.bind(this)
     this.handlePostFormCreate = this.handlePostFormCreate.bind(this)
 
     this.handleUserFormChange = this.handleUserFormChange.bind(this)
@@ -49,6 +50,7 @@ class App extends Component {
     this.handleCommentFormChange = this.handleCommentFormChange.bind(this)
     this.handleSlateCommentChange = this.handleSlateCommentChange.bind(this)
     this.commentHasMark = this.commentHasMark.bind(this)
+    this.commentHasBlock = this.commentHasBlock.bind(this)
     this.handleCommentFormCreate = this.handleCommentFormCreate.bind(this)
 
     this.state = {
@@ -96,6 +98,11 @@ class App extends Component {
     return content.activeMarks.some(mark => mark.type === type)
   }
 
+  postHasBlock(type) {
+    const { postFormData: { content } } = this.state
+    return content.blocks.some(node => node.type === type)
+  }
+
   handlePostFormChange(e) {
     const { name, value } = e.target;
     this.setState(prevState =>({
@@ -138,6 +145,11 @@ class App extends Component {
   commentHasMark(type) {
     const { commentFormData: { content } } = this.state
     return content.activeMarks.some(mark => mark.type === type)
+  }
+
+  commentHasBlock(type) {
+    const { commentFormData: { content } } = this.state
+    return content.blocks.some(node => node.type === type)
   }
 
   handleSlateCommentChange({ value }) {
@@ -282,6 +294,7 @@ class App extends Component {
       handlePostFormChange,
       handleSlatePostChange,
       postHasMark,
+      postHasBlock,
       handlePostFormCreate,
 
       handleUserFormChange,
@@ -295,6 +308,7 @@ class App extends Component {
       handleCommentFormChange,
       handleSlateCommentChange,
       commentHasMark,
+      commentHasBlock,
       handleCommentFormCreate,
     } = this
 
@@ -309,7 +323,6 @@ class App extends Component {
       comments,
       commentFormData,
     } = state
-    console.log(postFormData);
     return (
       <div className="App">
         <Header
@@ -325,6 +338,7 @@ class App extends Component {
           handlePostFormChange={handlePostFormChange}
           handleSlatePostChange={handleSlatePostChange}
           postHasMark={postHasMark}
+          postHasBlock={postHasBlock}
           handlePostFormCreate={handlePostFormCreate}
 
           userFormData={userFormData}
@@ -342,6 +356,7 @@ class App extends Component {
           handleCommentFormChange={handleCommentFormChange}
           handleSlateCommentChange={handleSlateCommentChange}
           commentHasMark={commentHasMark}
+          commentHasBlock={commentHasBlock}
           handleCommentFormCreate={handleCommentFormCreate}
         />
       </div>

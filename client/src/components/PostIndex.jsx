@@ -11,6 +11,7 @@ const PostIndex = props => {
     handlePostFormChange,
     handleSlatePostChange,
     postHasMark,
+    postHasBlock,
     handlePostFormCreate,
   } = props
 
@@ -22,12 +23,13 @@ const PostIndex = props => {
         handleChange={handlePostFormChange}
         handleSlateChange={handleSlatePostChange}
         hasMark={postHasMark}
+        hasBlock={postHasBlock}
         handleSubmit={handlePostFormCreate}
       />}
       {posts.map(post => (
-        <div className='post' key={post.id}>
-          <h2>{post.title}</h2>
-          <h3>{post.user.username}</h3>
+        <div className='form' key={post.id}>
+          <h1 className='title'>{post.title}</h1>
+          <h3 className='title'>{post.user.username}</h3>
           <button onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>
         </div>
       ))}

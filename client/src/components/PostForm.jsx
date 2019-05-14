@@ -15,6 +15,7 @@ const PostForm = props => {
     handleChange,
     handleSlateChange,
     hasMark,
+    hasBlock,
     handleSubmit,
   } = props
   return(
@@ -31,6 +32,7 @@ const PostForm = props => {
         value={formData.content}
         handleChange={handleSlateChange}
         hasMark={hasMark}
+        hasBlock={hasBlock}
       />
 
       <button onClick={handleSubmit}>Submit</button>
