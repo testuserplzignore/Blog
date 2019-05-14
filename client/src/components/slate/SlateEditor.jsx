@@ -59,38 +59,53 @@ class SlateEditor extends Component {
     const { value } = editor
     const { document } = value
 
-    if (type !== 'bulleted-list' && type !== 'numbered-list') {
+    if (type !== 'bulleted-list' && type !== 'numbered-list' && type !== 'code-block') {
       const isActive = this.props.hasBlock(type)
       const isList = this.props.hasBlock('list-item')
+      const isCode = this.props.hasBlock('code-line')
 
-      if (isList) {
+      console.log('isCode', isCode);
+
+      if (isList || isCode) {
         editor
           .setBlocks(isActive ? DEFAULT_NODE : type)
           .unwrapBlock('bulleted-list')
           .unwrapBlock('numbered-list')
+          .unwrapBlock('code-block')
       } else {
         editor.setBlocks(isActive ? DEFAULT_NODE : type)
       }
     } else {
       const isList = this.props.hasBlock('list-item')
+      const isCode = this.props.hasBlock('code-line')
       const isType = value.blocks.some(block => {
         return !!document.getClosest(block.key, parent => parent.type === type)
       })
-      console.log(isType);
+      console.log('istType', isType);
+      console.log('isList', isList);
+      console.log('isCode', isCode);
 
       if (isList && isType) {
         editor
           .setBlocks(DEFAULT_NODE)
           .unwrapBlock('bulleted-list')
           .unwrapBlock('numbered-list')
+      } else if (isCode && isType) {
+        editor
+          .setBlocks(DEFAULT_NODE)
+          .unwrapBlock('code-block')
+      } else if (isCode) {
+        editor.wrapBlock(type)
       } else if (isList) {
         editor
           .unwrapBlock(
             type === 'bulleted-list' ? 'numbered-list' : 'bulleted-list'
           )
           .wrapBlock(type)
-      } else {
+      } else if (type === 'bulleted-list' || type === 'numbered-list'){
         editor.setBlocks('list-item').wrapBlock(type)
+      } else {
+        editor.setBlocks('code-line').wrapBlock(type)
       }
     }
   }
@@ -161,6 +176,8 @@ class SlateEditor extends Component {
         return <ul {...attributes}>{children}</ul>
       case 'code-block':
         return <pre {...attributes}>{children}</pre>
+      case 'code-line':
+        return <code {...attributes}>{children}</code>
       case 'heading-two':
         return <h2 {...attributes}>{children}</h2>
       case 'list-item':
