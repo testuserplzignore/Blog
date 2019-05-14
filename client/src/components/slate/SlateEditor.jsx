@@ -63,9 +63,6 @@ class SlateEditor extends Component {
       const isList = this.props.hasBlock('list-item')
       const isCode = this.props.hasBlock('code-line')
 
-      console.log('isCode', isCode);
-      console.log('isActive', isActive);
-
       if (isList || isCode) {
         editor
           .setBlocks(isActive ? DEFAULT_NODE : type)
@@ -81,9 +78,6 @@ class SlateEditor extends Component {
       const isType = value.blocks.some(block => {
         return !!document.getClosest(block.key, parent => parent.type === type)
       })
-      console.log('istType', isType);
-      console.log('isList', isList);
-      console.log('isCode', isCode);
 
       if (isList && isType) {
         editor
@@ -117,7 +111,6 @@ class SlateEditor extends Component {
 
       if (blocks.size > 0) {
         const parent = document.getParent(blocks.first().key)
-        console.log(parent.type===type);
         isActive = (this.props.hasBlock('list-item') || this.props.hasBlock('code-line')) && parent && parent.type === type
       }
     }
