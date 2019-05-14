@@ -37,7 +37,7 @@ const Main = props => {
   } = props
 
   return(
-    <>
+    <div class='main'>
       <Route exact path='/' render={props => (
         <PostIndex
           {...props}
@@ -95,7 +95,7 @@ const Main = props => {
           postViewCheck={postViewCheck}
         />
       )} />
-    </>
+    </div>
   )
 }
 

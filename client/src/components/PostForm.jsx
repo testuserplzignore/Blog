@@ -35,7 +35,7 @@ const PostForm = props => {
         hasBlock={hasBlock}
       />
 
-      <button onClick={handleSubmit}>Submit</button>
+      <button className='button large green' onClick={handleSubmit}>Submit</button>
     </div>
   )
 }
