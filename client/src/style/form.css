@@ -1,21 +1,23 @@
-.toolbar-group {
-  margin-top: 1em;
+.userForm {
+  max-width: 820px;
+  margin: 0 auto;
 }
 
-.editor {
-  min-height: 180px;
-  margin-top: 1em;
+.userForm .input {
+  display: block;
+  margin: .5em auto;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  font-size: 1.5em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  width: 100%;
 }
 
-pre {
-  overflow-x: scroll;
-  background-color: rgb(220, 220, 220)
-}
+.userForm button {
 
-ol {
-  list-style: decimal inside;
-}
-
-ul {
-  list-style: inside;
 }

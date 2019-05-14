@@ -1,0 +1,21 @@
+.toolbar-group {
+  margin-top: 1em;
+}
+
+.editor {
+  min-height: 180px;
+  margin-top: 1em;
+}
+
+pre {
+  overflow-x: scroll;
+  background-color: rgb(220, 220, 220)
+}
+
+ol {
+  list-style: decimal inside;
+}
+
+ul {
+  list-style: inside;
+}

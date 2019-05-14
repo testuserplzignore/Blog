@@ -7,7 +7,7 @@ const CommentIndex = props => {
   } = props
 
   return(
-    <>
+    <div className='comments'>
     {comments &&
       <>
         {comments.map(comment => (
@@ -21,7 +21,7 @@ const CommentIndex = props => {
         ))}
       </>
     }
-    </>
+    </div>
   )
 }
 

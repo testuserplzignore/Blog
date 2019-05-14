@@ -24,6 +24,7 @@ const PostView = (props) => {
         post={JSON.parse(post.content)}
       />}
 
+      <CommentIndex comments={comments} />
 
       <PostForm
         formData={commentFormData}
@@ -33,7 +34,6 @@ const PostView = (props) => {
         hasBlock={commentHasBlock}
         handleSubmit={handleCommentFormCreate}
       />
-      <CommentIndex comments={comments} />
     </>
   )
 }
