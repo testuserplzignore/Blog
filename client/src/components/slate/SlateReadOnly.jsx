@@ -31,8 +31,10 @@ const ReadOnly = props => {
         return <blockquote {...attributes}>{children}</blockquote>
       case 'bulleted-list':
         return <ul {...attributes}>{children}</ul>
-      case 'heading-one':
-        return <h1 {...attributes}>{children}</h1>
+      case 'code-block':
+        return <pre {...attributes}>{children}</pre>
+      case 'code-line':
+        return <div {...attributes}>{children}</div>
       case 'heading-two':
         return <h2 {...attributes}>{children}</h2>
       case 'list-item':

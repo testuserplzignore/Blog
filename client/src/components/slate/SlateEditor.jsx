@@ -22,8 +22,7 @@ const plugins = [
       block: "code",
       line: "code-line"
     }
-  }),
-  SoftBreak({shift: true}),
+  })
 ]
 
 const DEFAULT_NODE = 'paragraph'
@@ -65,6 +64,7 @@ class SlateEditor extends Component {
       const isCode = this.props.hasBlock('code-line')
 
       console.log('isCode', isCode);
+      console.log('isActive', isActive);
 
       if (isList || isCode) {
         editor
@@ -95,7 +95,7 @@ class SlateEditor extends Component {
           .setBlocks(DEFAULT_NODE)
           .unwrapBlock('code-block')
       } else if (isCode) {
-        editor.wrapBlock(type)
+        editor.unwrapBlock('code-block').wrapBlock(type)
       } else if (isList) {
         editor
           .unwrapBlock(
@@ -177,7 +177,7 @@ class SlateEditor extends Component {
       case 'code-block':
         return <pre {...attributes}>{children}</pre>
       case 'code-line':
-        return <code {...attributes}>{children}</code>
+        return <div {...attributes}>{children}</div>
       case 'heading-two':
         return <h2 {...attributes}>{children}</h2>
       case 'list-item':
