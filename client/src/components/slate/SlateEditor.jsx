@@ -112,13 +112,13 @@ class SlateEditor extends Component {
 
   renderBlockButton = (type, icon) => {
     let isActive = this.props.hasBlock(type)
-
-    if (['numbered-list', 'bulleted-list'].includes(type)) {
+    if (['numbered-list', 'bulleted-list', 'code-block'].includes(type)) {
       const { value: { document, blocks } } = this.props
 
       if (blocks.size > 0) {
         const parent = document.getParent(blocks.first().key)
-        isActive = this.props.hasBlock('list-item') && parent && parent.type === type
+        console.log(parent.type===type);
+        isActive = (this.props.hasBlock('list-item') || this.props.hasBlock('code-line')) && parent && parent.type === type
       }
     }
 
