@@ -19,8 +19,9 @@ const PostForm = props => {
     handleSubmit,
   } = props
   return(
-    <div className='form'>
+    <div className='post'>
       <input
+        className='title-input'
         type='text'
         name='title'
         placeholder='Title'

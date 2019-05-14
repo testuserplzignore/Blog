@@ -190,23 +190,26 @@ class SlateEditor extends Component {
     return (
       <>
         <div className = 'toolbar'>
-          <ul className='button-group'>
-            <li>{this.renderMarkButton('bold', <strong>B</strong>)}</li>
-            <li>{this.renderMarkButton('italic', <em>I</em>)}</li>
-            <li>{this.renderMarkButton('underlined', <u>U</u>)}</li>
-            <li>{this.renderMarkButton('code', <code>`</code>)}</li>
-          </ul>
-          <ul className='button-group'>
-            <li>{this.renderBlockButton('code-block', 'Code Block')}</li>
-            <li>{this.renderBlockButton('heading-two', 'Heading Two')}</li>
-            <li>{this.renderBlockButton('block-quote', 'Quote')}</li>
-            <li>{this.renderBlockButton('numbered-list', 'numbered list')}</li>
-            <li>{this.renderBlockButton('bulleted-list', 'bullet list')}</li>
-          </ul>
+          <div className='toolbar-group'>
+            <ul className='button-group'>
+              <li>{this.renderMarkButton('bold', <strong>B</strong>)}</li>
+              <li>{this.renderMarkButton('italic', <em>I</em>)}</li>
+              <li>{this.renderMarkButton('underlined', <u>U</u>)}</li>
+              <li>{this.renderMarkButton('code', <code>`</code>)}</li>
+            </ul>
+          </div>
+          <div className='toolbar-group'>
+            <ul className='button-group'>
+              <li>{this.renderBlockButton('code-block', 'Code Block')}</li>
+              <li>{this.renderBlockButton('heading-two', 'Heading Two')}</li>
+              <li>{this.renderBlockButton('block-quote', 'Quote')}</li>
+              <li>{this.renderBlockButton('numbered-list', 'numbered list')}</li>
+              <li>{this.renderBlockButton('bulleted-list', 'bullet list')}</li>
+            </ul>
+          </div>
         </div>
         <Editor
           spellcheck
-          autoFocus
           className='editor'
           plugins={plugins}
           value={value}

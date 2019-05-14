@@ -21,6 +21,20 @@
   text-align: center;
 }
 
+.title-input {
+  margin: .5em auto;
+  background: transparent;
+  text-align: center;
+  border: none;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  width: 100%;
+}
+
 .post .title, .post .author {
   margin: .5em auto;
 }

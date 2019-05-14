@@ -37,7 +37,7 @@ const Main = props => {
   } = props
 
   return(
-    <div class='main'>
+    <div className='main'>
       <Route exact path='/' render={props => (
         <PostIndex
           {...props}
