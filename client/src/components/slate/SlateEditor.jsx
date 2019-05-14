@@ -43,7 +43,7 @@ class SlateEditor extends Component {
 
     return (
       <button
-        className={isActive ? 'slateButton-active' : 'button small'}
+        className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event =>this.onClickMark(event, type)}
       >
         <div className='icon'>{icon}</div>
@@ -117,7 +117,7 @@ class SlateEditor extends Component {
 
     return (
       <button
-        className={isActive ? 'slateButton-active' : 'button small'}
+        className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event => this.onClickBlock(event, type)}
       >
         <div className='icon'>{icon}</div>
