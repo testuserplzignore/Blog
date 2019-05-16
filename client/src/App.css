@@ -9,6 +9,10 @@
   background-color: rgb(220,220,220);
   min-height: 100vh;
 }
+
+.main {
+  margin-top: 2em;
+}
 /* posts as displayed by post index */
 .post, .comment {
   max-width: 820px;
