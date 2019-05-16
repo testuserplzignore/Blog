@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import './style/header.css'
+import './style/plasticButtons.css'
 import { withRouter } from 'react-router-dom'
 import { initialValue } from './components/slate/slateHelpers'
 

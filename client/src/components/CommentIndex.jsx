@@ -7,11 +7,11 @@ const CommentIndex = props => {
   } = props
 
   return(
-    <>
+    <div className='comments'>
     {comments &&
       <>
         {comments.map(comment => (
-          <div key={comment.id} className='post'>
+          <div key={comment.id} className='comment'>
             <h4 className='title'>{comment.title}</h4>
             <h5 className='title'>{comment.user.username}</h5>
             {comment.content && <SlateReadOnly
@@ -21,7 +21,7 @@ const CommentIndex = props => {
         ))}
       </>
     }
-    </>
+    </div>
   )
 }
 

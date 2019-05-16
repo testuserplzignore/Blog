@@ -1,4 +1,5 @@
 import React from 'react'
+import '../style/form.css'
 
 const UserForm = (props) => {
   const {
@@ -10,9 +11,10 @@ const UserForm = (props) => {
   } = props
 
   return (
-    <form onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}>
+    <form className='userForm' onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}>
       {!handleLogin &&
         <input
+        className='input'
         type='text'
         name='username'
         placeholder='Username'
@@ -20,6 +22,7 @@ const UserForm = (props) => {
         onChange={handleUserFormChange}
       />}
       <input
+        className='input'
         type='text'
         name='email'
         placeholder='Email'
@@ -27,13 +30,14 @@ const UserForm = (props) => {
         onChange={handleUserFormChange}
       />
       <input
+        className='input'
         type='password'
         name='password'
         placeholder='Password'
         value={userFormData.password}
         onChange={handleUserFormChange}
       />
-      <input type='submit'/>
+      <input className='button green large' type='submit'/>
     </form>
   )
 }

@@ -27,10 +27,10 @@ const PostIndex = props => {
         handleSubmit={handlePostFormCreate}
       />}
       {posts.map(post => (
-        <div className='form' key={post.id}>
+        <div className='post' key={post.id}>
           <h1 className='title'>{post.title}</h1>
-          <h3 className='title'>{post.user.username}</h3>
-          <button onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>
+          <h3 className='author'>{post.user.username}</h3>
+          <button className='button green medium' onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>
         </div>
       ))}
     </>

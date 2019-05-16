@@ -1,61 +1,23 @@
-.form {
-  max-width: 40em;
+.userForm {
+  max-width: 820px;
   margin: 0 auto;
-  margin-bottom: 8rem;
 }
 
-input:not([type=submit]),
-select,
-textarea,
-.editor {
-  margin: 2em auto;
-  max-width: 40em;
-  padding: .5em;
+.userForm .input {
+  display: block;
+  margin: .5em auto;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  font-size: 1.5em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
   width: 100%;
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 1px solid #bdc3c7;
-  border-left: 0;
-  box-shadow: 2px 5px 20px;
 }
 
-textarea,
-.editor {
-  resize: vertical;
-  min-height: 10em;
-}
+.userForm button {
 
-.title {
-  max-width: 40em;
-  margin: 1em auto;
-  padding: .5em;
-}
-
-pre {
-  background-color: lightgray;
-  overflow-x: scroll;
-}
-
-code {
-  background-color: lightgray;
-}
-
-.slateButton {
-  margin: .3em;
-  padding: .5em .5em;
-  min-width: 2em;
-  background-color: WhiteSmoke;
-  color: black;
-  cursor: pointer;
-  box-shadow: 2px 5px 20px;
-}
-
-.slateButton-active {
-  margin: .3em;
-  padding: .5em .5em;
-  min-width: 2em;
-  background-color: WhiteSmoke;
-  color: black;
-  cursor: pointer;
-  box-shadow: 2px 5px 7px;
 }

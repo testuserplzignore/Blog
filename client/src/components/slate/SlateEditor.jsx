@@ -43,7 +43,7 @@ class SlateEditor extends Component {
 
     return (
       <button
-        className={isActive ? 'slateButton-active' : 'slateButton'}
+        className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event =>this.onClickMark(event, type)}
       >
         <div className='icon'>{icon}</div>
@@ -117,7 +117,7 @@ class SlateEditor extends Component {
 
     return (
       <button
-        className={isActive ? 'slateButton-active' : 'slateButton'}
+        className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event => this.onClickBlock(event, type)}
       >
         <div className='icon'>{icon}</div>
@@ -190,23 +190,26 @@ class SlateEditor extends Component {
     return (
       <>
         <div className = 'toolbar'>
-          <div>
-            {this.renderMarkButton('bold', <strong>B</strong>)}
-            {this.renderMarkButton('italic', <em>I</em>)}
-            {this.renderMarkButton('underlined', <u>U</u>)}
-            {this.renderMarkButton('code', <code>`</code>)}
+          <div className='toolbar-group'>
+            <ul className='button-group'>
+              <li>{this.renderMarkButton('bold', <strong>B</strong>)}</li>
+              <li>{this.renderMarkButton('italic', <em>I</em>)}</li>
+              <li>{this.renderMarkButton('underlined', <u>U</u>)}</li>
+              <li>{this.renderMarkButton('code', <code>`</code>)}</li>
+            </ul>
           </div>
-          <div>
-            {this.renderBlockButton('code-block', 'Code Block')}
-            {this.renderBlockButton('heading-two', 'Heading Two')}
-            {this.renderBlockButton('block-quote', 'Quote')}
-            {this.renderBlockButton('numbered-list', 'numbered list')}
-            {this.renderBlockButton('bulleted-list', 'bullet list')}
+          <div className='toolbar-group'>
+            <ul className='button-group'>
+              <li>{this.renderBlockButton('code-block', 'Code Block')}</li>
+              <li>{this.renderBlockButton('heading-two', 'Heading Two')}</li>
+              <li>{this.renderBlockButton('block-quote', 'Quote')}</li>
+              <li>{this.renderBlockButton('numbered-list', 'numbered list')}</li>
+              <li>{this.renderBlockButton('bulleted-list', 'bullet list')}</li>
+            </ul>
           </div>
         </div>
         <Editor
           spellcheck
-          autoFocus
           className='editor'
           plugins={plugins}
           value={value}
