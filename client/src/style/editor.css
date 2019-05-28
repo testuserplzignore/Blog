@@ -7,6 +7,11 @@
   margin-top: 1em;
 }
 
+.icon {
+  height: 15px;
+  width: 15px;
+}
+
 pre {
   overflow-x: scroll;
   background-color: rgb(220, 220, 220)

@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
 import Code from "@convertkit/slate-code"
+import boldIcon from './icons/bold.svg'
+import italicIcon from './icons/italic.svg'
+import underlineIcon from './icons/underline.svg'
+import codeSnippetIcon from './icons/highlighter.svg'
+import headerIcon from './icons/header.svg'
+import numberedListIcon from './icons/numbered_list.svg'
+import bulletListIcon from './icons/bullet_list.svg'
+import codeBlockIcon from './icons/code_block.svg'
+import quoteIcon from './icons/quote.svg'
 
 import { createPost } from '../../services/posts'
 import {
@@ -46,7 +55,7 @@ class SlateEditor extends Component {
         className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event =>this.onClickMark(event, type)}
       >
-        <div className='icon'>{icon}</div>
+        <img className='icon' src={icon} />
       </button>
     )
   }
@@ -120,7 +129,7 @@ class SlateEditor extends Component {
         className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event => this.onClickBlock(event, type)}
       >
-        <div className='icon'>{icon}</div>
+        <img className='icon' src={icon} />
       </button>
     )
   }
@@ -192,19 +201,19 @@ class SlateEditor extends Component {
         <div className = 'toolbar'>
           <div className='toolbar-group'>
             <ul className='button-group'>
-              <li>{this.renderMarkButton('bold', <strong>B</strong>)}</li>
-              <li>{this.renderMarkButton('italic', <em>I</em>)}</li>
-              <li>{this.renderMarkButton('underlined', <u>U</u>)}</li>
-              <li>{this.renderMarkButton('code', <code>`</code>)}</li>
+              <li>{this.renderMarkButton('bold', boldIcon)}</li>
+              <li>{this.renderMarkButton('italic', italicIcon)}</li>
+              <li>{this.renderMarkButton('underlined', underlineIcon)}</li>
+              <li>{this.renderMarkButton('code', codeSnippetIcon)}</li>
             </ul>
           </div>
           <div className='toolbar-group'>
             <ul className='button-group'>
-              <li>{this.renderBlockButton('code-block', 'Code Block')}</li>
-              <li>{this.renderBlockButton('heading-two', 'Heading Two')}</li>
-              <li>{this.renderBlockButton('block-quote', 'Quote')}</li>
-              <li>{this.renderBlockButton('numbered-list', 'numbered list')}</li>
-              <li>{this.renderBlockButton('bulleted-list', 'bullet list')}</li>
+              <li>{this.renderBlockButton('code-block', codeBlockIcon)}</li>
+              <li>{this.renderBlockButton('heading-two', headerIcon)}</li>
+              <li>{this.renderBlockButton('block-quote', quoteIcon)}</li>
+              <li>{this.renderBlockButton('numbered-list', numberedListIcon)}</li>
+              <li>{this.renderBlockButton('bulleted-list', bulletListIcon)}</li>
             </ul>
           </div>
         </div>

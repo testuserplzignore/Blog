@@ -18,6 +18,12 @@ const PostForm = props => {
     hasBlock,
     handleSubmit,
   } = props
+
+  const buttonActive = !!(
+    (formData.title.length > 0) & (
+      !!formData.content.data.get('undos') &&
+      formData.content.data.get('undos').size > 1)
+    );
   return(
     <div className='post'>
       <input
@@ -36,7 +42,13 @@ const PostForm = props => {
         hasBlock={hasBlock}
       />
 
-      <button className='button large green' onClick={handleSubmit}>Submit</button>
+      <button
+        className='button large green'
+        onClick={handleSubmit}
+        disabled={!buttonActive}
+      >
+        Submit
+      </button>
     </div>
   )
 }
