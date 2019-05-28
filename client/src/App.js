@@ -164,20 +164,24 @@ class App extends Component {
 
   async handleCommentFormCreate(e){
     e.preventDefault()
-    const { commentFormData, post } = this.state
-    const commentObj = {
-      title: commentFormData.title,
-      content: JSON.stringify(commentFormData.content.toJSON())
+    const { commentFormData, post, user } = this.state
+    if (user.id) {
+      const commentObj = {
+        title: commentFormData.title,
+        content: JSON.stringify(commentFormData.content.toJSON())
+      }
+      await createComment(commentObj, post.id)
+      const comments = await getPostComments(post.id)
+      this.setState({
+        comments,
+        commentFormData: {
+          title: '',
+          content: initialValue,
+        },
+      })
+    } else {
+      this.props.history.push('/register')
     }
-    await createComment(commentObj, post.id)
-    const comments = await getPostComments(post.id)
-    this.setState({
-      comments,
-      commentFormData: {
-        title: '',
-        content: initialValue,
-      },
-    })
   }
 
   handleUserFormChange(e) {

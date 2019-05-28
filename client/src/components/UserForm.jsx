@@ -19,13 +19,14 @@ const UserForm = (props) => {
     <form className='userForm' onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}>
       {!handleLogin &&
         <input
-        className='input'
-        type='text'
-        name='username'
-        placeholder='Username'
-        value={userFormData.username}
-        onChange={handleUserFormChange}
-      />}
+          className='input'
+          type='text'
+          name='username'
+          placeholder='Username'
+          value={userFormData.username}
+          onChange={handleUserFormChange}
+        />
+      }
       <input
         className='input'
         type='text'
