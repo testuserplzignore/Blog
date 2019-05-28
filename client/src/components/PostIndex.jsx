@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 
 import PostForm from './PostForm'
 
@@ -18,7 +17,7 @@ const PostIndex = props => {
 
   return (
     <>
-      {user.id == 1 && <PostForm
+      {user.id === 1 && <PostForm
         formData={postFormData}
         handleChange={handlePostFormChange}
         handleSlateChange={handleSlatePostChange}
@@ -30,7 +29,7 @@ const PostIndex = props => {
         <div className='post' key={post.id}>
           <h1 className='title'>{post.title}</h1>
           <h3 className='author'>{post.user.username}</h3>
-          <button className='button green medium' onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>
+          <button className='button blue medium' onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>
         </div>
       ))}
     </>

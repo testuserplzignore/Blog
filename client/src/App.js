@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './style/header.css'
 import './style/plasticButtons.css'
@@ -121,7 +120,7 @@ class App extends Component {
       title: postFormData.title,
       content: JSON.stringify(postFormData.content.toJSON())
     }
-    const post = await createPost(postObj)
+    await createPost(postObj)
     const posts = await getPosts()
 
     this.setState({
@@ -170,7 +169,7 @@ class App extends Component {
       title: commentFormData.title,
       content: JSON.stringify(commentFormData.content.toJSON())
     }
-    const comment = await createComment(commentObj, post.id)
+    await createComment(commentObj, post.id)
     const comments = await getPostComments(post.id)
     this.setState({
       comments,
@@ -277,7 +276,7 @@ class App extends Component {
   }
 
   async postViewCheck(postId, propId) {
-    if (postId != propId){
+    if (postId !== parseInt(propId)){
       const post = await getPost(parseInt(propId))
       const comments = await getPostComments(parseInt(propId))
       this.setState({

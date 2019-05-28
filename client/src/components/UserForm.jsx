@@ -10,6 +10,11 @@ const UserForm = (props) => {
     handleLogin,
   } = props
 
+  const buttonActive = !!handleLogin ? (
+    userFormData.email.length > 0 && userFormData.password.length > 0
+  ) : (
+    userFormData.username.length > 0 && userFormData.email.length > 0 && userFormData.password.length > 0
+  );
   return (
     <form className='userForm' onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}>
       {!handleLogin &&
@@ -37,7 +42,7 @@ const UserForm = (props) => {
         value={userFormData.password}
         onChange={handleUserFormChange}
       />
-      <input className='button green large' type='submit'/>
+      <input disabled={!buttonActive} className='button green large' type='submit'/>
     </form>
   )
 }

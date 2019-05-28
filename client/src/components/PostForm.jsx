@@ -1,13 +1,6 @@
 import React from 'react'
-import { Editor } from 'slate-react'
-import { Value } from 'slate'
 import SlateEditor from './slate/SlateEditor'
 import '../style/editor.css'
-import {
-  plugins,
-  initialValue,
-  renderMark,
-} from './slate/slateHelpers'
 
 const PostForm = props => {
   const {
@@ -19,8 +12,8 @@ const PostForm = props => {
     handleSubmit,
   } = props
 
-  const buttonActive = !!(
-    (formData.title.length > 0) & (
+  const buttonActive = (
+    (formData.title.length > 0) && (
       !!formData.content.data.get('undos') &&
       formData.content.data.get('undos').size > 1)
     );

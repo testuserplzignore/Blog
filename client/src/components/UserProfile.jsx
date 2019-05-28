@@ -31,7 +31,6 @@ class UserProfile extends Component {
   }
 
   render() {
-    console.log(this.state);
     const {
       state,
       props,
@@ -42,15 +41,22 @@ class UserProfile extends Component {
       edit,
     } = state
     const {
-      user,
       userFormData,
       handleDeleteUser,
       handleUserFormChange,
     } = props
     return(
       <>
-        <button onClick={handleDeleteUser}>Delete</button>
-        <button onClick={handleEdit}>Edit</button>
+        <div className='toolbar-group'>
+          <button className='button blue medium' onClick={handleDeleteUser}>
+            Delete
+          </button>
+        </div>
+        <div className='toolbar-group'>
+          <button className='button blue medium' onClick={handleEdit}>
+            Edit
+          </button>
+        </div>
 
         {edit &&
           <UserForm

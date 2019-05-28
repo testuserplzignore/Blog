@@ -1,11 +1,9 @@
 import React from 'react'
-import UserForm from './UserForm'
 import { withRouter } from 'react-router-dom'
 
 const Header = props => {
   const {
     user,
-    handleLogin,
     handleLogout,
   } = props
   return (

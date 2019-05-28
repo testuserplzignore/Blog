@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Editor } from 'slate-react'
-import { Value } from 'slate'
 import Code from "@convertkit/slate-code"
 import boldIcon from './icons/bold.svg'
 import italicIcon from './icons/italic.svg'
@@ -12,14 +11,11 @@ import bulletListIcon from './icons/bullet_list.svg'
 import codeBlockIcon from './icons/code_block.svg'
 import quoteIcon from './icons/quote.svg'
 
-import { createPost } from '../../services/posts'
 import {
-  SoftBreak,
   isBoldHotkey,
   isItalicHotkey,
   isUnderlinedHotkey,
   isCodeHotkey,
-  initialValue,
 } from './slateHelpers'
 
 const plugins = [
@@ -55,7 +51,7 @@ class SlateEditor extends Component {
         className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event =>this.onClickMark(event, type)}
       >
-        <img className='icon' src={icon} />
+        <img className='icon' src={icon} alt='editor icons'/>
       </button>
     )
   }
@@ -129,7 +125,7 @@ class SlateEditor extends Component {
         className={isActive ? 'button button-active small' : 'button small'}
         onMouseDown={event => this.onClickBlock(event, type)}
       >
-        <img className='icon' src={icon} />
+        <img className='icon' src={icon} alt='editor icons'/>
       </button>
     )
   }

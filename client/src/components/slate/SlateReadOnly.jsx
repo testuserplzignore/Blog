@@ -1,5 +1,4 @@
 import React from 'react'
-import Plain from 'slate-plain-serializer'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
 

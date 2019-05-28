@@ -23,7 +23,7 @@
   background-image: -moz-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
   background-image: -ms-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
   background-image: -o-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
+  background-image: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
 
   -webkit-transition: background-color .2s ease-out;
   -moz-transition: background-color .2s ease-out;
@@ -103,7 +103,7 @@
   background-image: -moz-linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
   background-image: -ms-linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
   background-image: -o-linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
-  background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+  background-image: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
 }
 
 /* */
@@ -156,7 +156,10 @@
 .green[disabled], .green[disabled]:hover, .green[disabled]:active{
   border-color: #57A957;
   background: #57A957;
+  border-color: #eaeaea;
+  background: #fafafa;
   color: #D2FFD2;
+  color: #999;
 }
 
 .red[disabled], .red[disabled]:hover, .red[disabled]:active{
