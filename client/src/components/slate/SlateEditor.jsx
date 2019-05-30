@@ -164,7 +164,7 @@ class SlateEditor extends Component {
     }
   }
 
-  renderNode = (props, editor, next) => {
+  renderBlock = (props, editor, next) => {
     const { attributes, children, node } = props
 
     switch (node.type) {
@@ -222,7 +222,7 @@ class SlateEditor extends Component {
           onChange={handleChange}
           onKeyDown={this.onKeyDown}
           renderMark={this.renderMark}
-          renderNode={this.renderNode}
+          renderBlock={this.renderBlock}
         />
       </>
     )
