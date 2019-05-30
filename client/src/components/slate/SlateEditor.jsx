@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Editor } from 'slate-react'
-import Code from "@convertkit/slate-code"
+import PlaceholderPlugin from 'slate-react-placeholder'
 import boldIcon from './icons/bold.svg'
 import italicIcon from './icons/italic.svg'
 import underlineIcon from './icons/underline.svg'
@@ -16,18 +16,24 @@ import {
   isItalicHotkey,
   isUnderlinedHotkey,
   isCodeHotkey,
+  SoftBreak,
 } from './slateHelpers'
 
 const plugins = [
-  Code({
-    highlight: true,
-    block: "code",
-    line: "code-line",
-    classNames: {
-      block: "code",
-      line: "code-line"
-    }
-  })
+  {
+    queries: {
+      isEmpty: editor => {
+        console.log(editor.value.document.text === '');
+        return editor.value.document.text === ''
+      },
+    },
+  },
+  PlaceholderPlugin({
+    placeholder: 'Hello yes I am a placeholder',
+    when: 'isEmpty',
+    style: { color: 'black', opacity: '1', fontFamily: 'monospace' },
+  }),
+  SoftBreak({shift:true}),
 ]
 
 const DEFAULT_NODE = 'paragraph'
