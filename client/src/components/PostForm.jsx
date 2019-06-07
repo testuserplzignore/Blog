@@ -6,7 +6,7 @@ import {
   Divider,
   Input,
  } from 'semantic-ui-react'
-import '../style/editor.css'
+//import '../style/editor.css'
 
 const PostForm = props => {
   const {

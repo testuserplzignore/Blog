@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './App.css';
+import './App.css';
 import { withRouter } from 'react-router-dom'
 import { initialValue } from './components/slate/slateHelpers'
 

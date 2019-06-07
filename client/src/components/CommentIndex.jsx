@@ -1,5 +1,6 @@
 import React from 'react'
 import SlateEditor from './slate/SlateEditor'
+import { Value } from 'slate'
 import {
   Container,
   Comment,
@@ -24,7 +25,7 @@ const CommentIndex = props => {
               <Comment.Author as='h5'>{comment.user.username}</Comment.Author>
               {comment.content && <SlateEditor
                 isReadOnly={true}
-                value={JSON.parse(comment.content)}
+                value={Value.fromJSON(JSON.parse(comment.content))}
               />}
             </Comment.Content>
           </Comment>

@@ -222,6 +222,7 @@ class SlateEditor extends Component {
         <Editor
           spellcheck
           className='editor'
+          style={!isReadOnly && {minHeight: '200px'}}
           readOnly={isReadOnly}
           plugins={plugins}
           value={value}

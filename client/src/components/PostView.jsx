@@ -1,4 +1,5 @@
 import React from 'react'
+import { Value } from 'slate'
 import {
   Container,
   Comment,
@@ -6,7 +7,7 @@ import {
 } from 'semantic-ui-react'
 import CommentIndex from './CommentIndex'
 import PostForm from './PostForm'
-import SlateReadOnly from './slate/SlateReadOnly'
+import SlateEditor from './slate/SlateEditor'
 
 const PostView = (props) => {
   const {
@@ -24,9 +25,10 @@ const PostView = (props) => {
   postViewCheck(post.id, props.match.params.id)
   return (
     <Container>
-      <h1 className='title'>{post.title}</h1>
-      {post.content && <SlateReadOnly
-        post={JSON.parse(post.content)}
+      <Header as='h1'>{post.title}</Header>
+      {post.content && <SlateEditor
+        isReadOnly={true}
+        value={Value.fromJSON(JSON.parse(post.content))}
       />}
       <Header as='h3' dividing>
         Comments
