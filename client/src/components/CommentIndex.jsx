@@ -1,5 +1,11 @@
 import React from 'react'
-import SlateReadOnly from './slate/SlateReadOnly'
+import SlateEditor from './slate/SlateEditor'
+import {
+  Container,
+  Comment,
+  Header,
+  Divider,
+} from 'semantic-ui-react'
 
 const CommentIndex = props => {
   const {
@@ -7,21 +13,27 @@ const CommentIndex = props => {
   } = props
 
   return(
-    <div className='comments'>
+    <Container>
     {comments &&
       <>
         {comments.map(comment => (
-          <div key={comment.id} className='comment'>
-            <h4 className='title'>{comment.title}</h4>
-            <h5 className='title'>{comment.user.username}</h5>
-            {comment.content && <SlateReadOnly
-              post={JSON.parse(comment.content)}
-            />}
-          </div>
+          <>
+          <Comment key={comment.id}>
+            <Comment.Content>
+              <Comment.Text as='h4'>{comment.title}</Comment.Text>
+              <Comment.Author as='h5'>{comment.user.username}</Comment.Author>
+              {comment.content && <SlateEditor
+                isReadOnly={true}
+                value={JSON.parse(comment.content)}
+              />}
+            </Comment.Content>
+          </Comment>
+          <Divider />
+          </>
         ))}
       </>
     }
-    </div>
+    </Container>
   )
 }
 

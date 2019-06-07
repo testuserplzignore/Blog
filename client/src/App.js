@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-import './style/header.css'
-import './style/plasticButtons.css'
+//import './App.css';
 import { withRouter } from 'react-router-dom'
 import { initialValue } from './components/slate/slateHelpers'
 
@@ -24,7 +22,7 @@ import {
   verifyToken,
 } from './services/users'
 
-import Header from './components/Header'
+import NavBar from './components/NavBar'
 import Main from './components/Main'
 
 class App extends Component {
@@ -329,7 +327,7 @@ class App extends Component {
     } = state
     return (
       <div className="App">
-        <Header
+        <NavBar
           user={user}
           handleUserFormChange={handleUserFormChange}
           handleLogout={handleLogout}

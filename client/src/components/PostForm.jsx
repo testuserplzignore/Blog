@@ -1,5 +1,11 @@
 import React from 'react'
 import SlateEditor from './slate/SlateEditor'
+import {
+  Button,
+  Segment,
+  Divider,
+  Input,
+ } from 'semantic-ui-react'
 import '../style/editor.css'
 
 const PostForm = props => {
@@ -18,15 +24,19 @@ const PostForm = props => {
       formData.content.data.get('undos').size > 1)
     );
   return(
-    <div className='post'>
-      <input
-        className='title-input'
-        type='text'
+    <Segment>
+      <Input
+        fluid
+        transparent
         name='title'
         placeholder='Title'
+        size='massive'
+        autoComplete="off"
         value={formData.title}
         onChange={handleChange}
       />
+
+      <Divider section />
 
       <SlateEditor
         value={formData.content}
@@ -35,14 +45,14 @@ const PostForm = props => {
         hasBlock={hasBlock}
       />
 
-      <button
-        className='button large green'
+      <Button
+        color='green'
         onClick={handleSubmit}
         disabled={!buttonActive}
       >
         Submit
-      </button>
-    </div>
+      </Button>
+    </Segment>
   )
 }
 
