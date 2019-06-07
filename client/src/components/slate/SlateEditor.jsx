@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { Editor } from 'slate-react'
 import PlaceholderPlugin from 'slate-react-placeholder'
-import boldIcon from './icons/bold.svg'
-import italicIcon from './icons/italic.svg'
-import underlineIcon from './icons/underline.svg'
-import codeSnippetIcon from './icons/highlighter.svg'
-import headerIcon from './icons/header.svg'
-import numberedListIcon from './icons/numbered_list.svg'
-import bulletListIcon from './icons/bullet_list.svg'
-import codeBlockIcon from './icons/code_block.svg'
-import quoteIcon from './icons/quote.svg'
+import {
+  Button,
+  Icon,
+  Segment,
+  Grid,
+  Divider
+} from 'semantic-ui-react'
 
 import {
   isBoldHotkey,
@@ -23,7 +21,6 @@ const plugins = [
   {
     queries: {
       isEmpty: editor => {
-        console.log(editor.value.document.text === '');
         return editor.value.document.text === ''
       },
     },
@@ -53,12 +50,13 @@ class SlateEditor extends Component {
     const isActive = this.props.hasMark(type)
 
     return (
-      <button
-        className={isActive ? 'button button-active small' : 'button small'}
+      <Button
+        icon
+        active={isActive}
         onMouseDown={event =>this.onClickMark(event, type)}
       >
-        <img className='icon' src={icon} alt='editor icons'/>
-      </button>
+        <Icon name={icon}/>
+      </Button>
     )
   }
 
@@ -127,12 +125,13 @@ class SlateEditor extends Component {
     }
 
     return (
-      <button
-        className={isActive ? 'button button-active small' : 'button small'}
+      <Button
+        icon
+        active={isActive}
         onMouseDown={event => this.onClickBlock(event, type)}
       >
-        <img className='icon' src={icon} alt='editor icons'/>
-      </button>
+        <Icon name={icon}/>
+      </Button>
     )
   }
 
@@ -196,32 +195,35 @@ class SlateEditor extends Component {
   render() {
     const {
       value,
+      isReadOnly,
       handleChange,
     } = this.props
     return (
       <>
-        <div className = 'toolbar'>
-          <div className='toolbar-group'>
-            <ul className='button-group'>
-              <li>{this.renderMarkButton('bold', boldIcon)}</li>
-              <li>{this.renderMarkButton('italic', italicIcon)}</li>
-              <li>{this.renderMarkButton('underlined', underlineIcon)}</li>
-              <li>{this.renderMarkButton('code', codeSnippetIcon)}</li>
-            </ul>
-          </div>
-          <div className='toolbar-group'>
-            <ul className='button-group'>
-              <li>{this.renderBlockButton('code-block', codeBlockIcon)}</li>
-              <li>{this.renderBlockButton('heading-two', headerIcon)}</li>
-              <li>{this.renderBlockButton('block-quote', quoteIcon)}</li>
-              <li>{this.renderBlockButton('numbered-list', numberedListIcon)}</li>
-              <li>{this.renderBlockButton('bulleted-list', bulletListIcon)}</li>
-            </ul>
-          </div>
-        </div>
+        {!isReadOnly &&
+          <>
+            <Button.Group>
+              {this.renderMarkButton('bold', 'bold')}
+              {this.renderMarkButton('italic', 'italic')}
+              {this.renderMarkButton('underlined', 'underline')}
+              {this.renderMarkButton('code', 'magic')}
+            </Button.Group>{' '}
+
+            <Button.Group>
+              {this.renderBlockButton('code-block', 'code')}
+              {this.renderBlockButton('heading-two', 'heading')}
+              {this.renderBlockButton('block-quote', 'quote right')}
+              {this.renderBlockButton('numbered-list', 'numbered list')}
+              {this.renderBlockButton('bulleted-list', 'list ol')}
+            </Button.Group>
+          </>
+        }
+
         <Editor
           spellcheck
           className='editor'
+          style={!isReadOnly && {minHeight: '200px'}}
+          readOnly={isReadOnly}
           plugins={plugins}
           value={value}
           ref={this.ref}

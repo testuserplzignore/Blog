@@ -1,4 +1,9 @@
 import React from 'react'
+import {
+  Button,
+  Container,
+  Item,
+ } from 'semantic-ui-react'
 
 import PostForm from './PostForm'
 
@@ -16,23 +21,27 @@ const PostIndex = props => {
 
 
   return (
-    <>
-      {user.id === 1 && <PostForm
+    <Container>
+      { user.id === 1 && <PostForm
         formData={postFormData}
         handleChange={handlePostFormChange}
         handleSlateChange={handleSlatePostChange}
         hasMark={postHasMark}
         hasBlock={postHasBlock}
         handleSubmit={handlePostFormCreate}
-      />}
-      {posts.map(post => (
-        <div className='post' key={post.id}>
-          <h1 className='title'>{post.title}</h1>
-          <h3 className='author'>{post.user.username}</h3>
-          <button className='button blue medium' onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</button>
-        </div>
-      ))}
-    </>
+      /> }
+      <Item.Group divided>
+        { posts.map( post => (
+          <Item key={post.id}>
+            <Item.Content>
+              <Item.Header as='h1'>{post.title}</Item.Header>
+              <Item.Meta as='h3'>{post.user.username}</Item.Meta>
+              <Button color='blue' onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</Button>
+            </Item.Content>
+          </Item>
+        ))}
+      </Item.Group>
+    </Container>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserForm from './UserForm'
+import { Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 class UserProfile extends Component {
@@ -48,14 +49,14 @@ class UserProfile extends Component {
     return(
       <>
         <div className='toolbar-group'>
-          <button className='button blue medium' onClick={handleDeleteUser}>
+          <Button color='red' onClick={handleDeleteUser}>
             Delete
-          </button>
+          </Button>
         </div>
         <div className='toolbar-group'>
-          <button className='button blue medium' onClick={handleEdit}>
+          <Button color='blue' onClick={handleEdit}>
             Edit
-          </button>
+          </Button>
         </div>
 
         {edit &&

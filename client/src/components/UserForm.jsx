@@ -1,5 +1,10 @@
 import React from 'react'
-import '../style/form.css'
+import {
+  Button,
+  Input,
+  Form,
+} from 'semantic-ui-react'
+
 
 const UserForm = (props) => {
   const {
@@ -16,35 +21,43 @@ const UserForm = (props) => {
     userFormData.username.length > 0 && userFormData.email.length > 0 && userFormData.password.length > 0
   );
   return (
-    <form className='userForm' onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}>
-      {!handleLogin &&
-        <input
-          className='input'
+    <Form
+      onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}
+    >
+      { !handleLogin &&
+        <Form.Field>
+          <Form.Input
+            label='Username'
+            type='text'
+            name='username'
+            placeholder='Username'
+            value={userFormData.username}
+            onChange={handleUserFormChange}
+          />
+        </Form.Field>
+      }
+      <Form.Field>
+        <Form.Input
+          label='Email'
           type='text'
-          name='username'
-          placeholder='Username'
-          value={userFormData.username}
+          name='email'
+          placeholder='Email'
+          value={userFormData.email}
           onChange={handleUserFormChange}
         />
-      }
-      <input
-        className='input'
-        type='text'
-        name='email'
-        placeholder='Email'
-        value={userFormData.email}
-        onChange={handleUserFormChange}
-      />
-      <input
-        className='input'
-        type='password'
-        name='password'
-        placeholder='Password'
-        value={userFormData.password}
-        onChange={handleUserFormChange}
-      />
-      <input disabled={!buttonActive} className='button green large' type='submit'/>
-    </form>
+      </Form.Field>
+      <Form.Field>
+        <Form.Input
+          label='Password'
+          type='password'
+          name='password'
+          placeholder='Password'
+          value={userFormData.password}
+          onChange={handleUserFormChange}
+        />
+      </Form.Field>
+      <Button disabled={!buttonActive} color='green' type='submit'>Submit</Button>
+    </Form>
   )
 }
 

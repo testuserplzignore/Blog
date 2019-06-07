@@ -10,8 +10,9 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "slate": "^0.47.3",
-    "slate-react": "^0.22.3",
+    "semantic-ui-react": "^0.87.1",
+    "slate": "^0.47.4",
+    "slate-react": "^0.22.4",
     "slate-react-placeholder": "^0.2.3",
     "slate-soft-break": "^0.9.0"
   },

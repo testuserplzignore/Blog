@@ -1,5 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import {
+  Container
+} from 'semantic-ui-react'
 
 import PostIndex from './PostIndex'
 import PostView from './PostView'
@@ -37,7 +40,7 @@ const Main = props => {
   } = props
 
   return(
-    <div className='main'>
+    <Container className='main'>
       <Route exact path='/' render={props => (
         <PostIndex
           {...props}
@@ -95,7 +98,7 @@ const Main = props => {
           postViewCheck={postViewCheck}
         />
       )} />
-    </div>
+    </Container>
   )
 }
 
