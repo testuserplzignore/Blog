@@ -4,9 +4,6 @@ import PlaceholderPlugin from 'slate-react-placeholder'
 import {
   Button,
   Icon,
-  Segment,
-  Grid,
-  Divider
 } from 'semantic-ui-react'
 
 import {
@@ -222,7 +219,7 @@ class SlateEditor extends Component {
         <Editor
           spellcheck
           className='editor'
-          style={!isReadOnly && {minHeight: '200px'}}
+          style={!isReadOnly ? {minHeight: '200px'} : null}
           readOnly={isReadOnly}
           plugins={plugins}
           value={value}

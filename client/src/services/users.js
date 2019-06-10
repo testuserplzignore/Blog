@@ -2,8 +2,8 @@ import { api, updateToken } from './apiHelper'
 
 const createUser = async (user) => {
   const resp = await api.post('/users', {user: user})
-  updateToken(resp.data.token)
-  return resp.data.user
+  updateToken(resp.data.data.attributes.token)
+  return resp.data.data
 }
 
 const loginUser = async (email, password) => {
@@ -11,19 +11,19 @@ const loginUser = async (email, password) => {
     email,
     password
   })
-  updateToken(resp.data.token)
-  return resp.data.user
+  updateToken(resp.data.data.attributes.token)
+  return resp.data.data
 }
 
 const updateUser = async (id, data) => {
   const resp = await api.put(`/users/${id}`, data)
-  updateToken(resp.data.token)
-  return resp.data.user
+  updateToken(resp.data.data.attributes.token)
+  return resp.data.data
 }
 
 const deleteUser = async (id) => {
   const resp = await api.delete(`/users/${id}`)
-  return resp.data
+  return resp.data.data
 }
 
 const verifyToken = async () => {
@@ -39,7 +39,7 @@ const verifyToken = async () => {
         }
       });
       updateToken(token);
-      return resp.data;
+      return resp.data.data;
     } catch (e) {
       console.log(e);
       return false;

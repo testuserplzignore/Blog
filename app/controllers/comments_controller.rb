@@ -2,9 +2,9 @@ class CommentsController < ApplicationController
   skip_before_action :ensure_signed_in, only: [:index]
 
   def index
-    @post = Post.find(params[:post_id])
-    @comments = @post.comments
-    render json: @comments, include: :user
+
+    @comments = Comment.includes(:user).where(post_id: params[:post_id])
+    render json: CommentSerializer.new(@comments)
   end
 
   def create
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     }
     @comment = @post.comments.new(new_comment)
     if @comment.save!
-      render json: @comment
+      render json: CommentSerializer.new(@comment)
     else
       render json: { errors: @comment.errors }, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
-      render json: @comment, status: :ok
+      render json: CommentSerializer(@comment), status: :ok
     else
       render json: { errors: @comment.errors }, status: :unprocessable_entity
     end

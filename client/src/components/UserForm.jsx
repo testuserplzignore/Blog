@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Button,
-  Input,
   Form,
 } from 'semantic-ui-react'
 

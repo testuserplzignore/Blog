@@ -211,6 +211,7 @@ class App extends Component {
     e.preventDefault()
     const { email, password } = this.state.userFormData
     const user = await loginUser(email, password)
+    console.log(user);
     this.setState({
       user,
       userFormData: {
@@ -237,8 +238,8 @@ class App extends Component {
     if (!edit) {
       this.setState({
         userFormData: {
-          username: user.username,
-          email: user.email,
+          username: user.attributes.username,
+          email: user.attributes.email,
           password: '',
         }
       })
@@ -278,7 +279,7 @@ class App extends Component {
   }
 
   async postViewCheck(postId, propId) {
-    if (postId !== parseInt(propId)){
+    if (parseInt(postId) !== parseInt(propId)){
       const post = await getPost(parseInt(propId))
       const comments = await getPostComments(parseInt(propId))
       this.setState({
@@ -313,7 +314,6 @@ class App extends Component {
       commentHasBlock,
       handleCommentFormCreate,
     } = this
-
     const {
       user,
       userFormData,
@@ -325,6 +325,7 @@ class App extends Component {
       comments,
       commentFormData,
     } = state
+    console.log(state);
     return (
       <div className="App">
         <NavBar
