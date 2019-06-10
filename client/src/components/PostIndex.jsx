@@ -19,10 +19,9 @@ const PostIndex = props => {
     handlePostFormCreate,
   } = props
 
-
   return (
     <Container>
-      { user.id === 1 && <PostForm
+      { parseInt(user.id) === 1 && <PostForm
         formData={postFormData}
         handleChange={handlePostFormChange}
         handleSlateChange={handleSlatePostChange}

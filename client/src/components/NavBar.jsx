@@ -11,7 +11,7 @@ const NavBar = props => {
     user,
     handleLogout,
   } = props
-  console.log(user);
+  
   return (
     <Menu size='massive'>
       <Menu.Item as='a' onClick={()=>props.history.push('/')}>Home</Menu.Item>

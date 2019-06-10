@@ -325,7 +325,6 @@ class App extends Component {
       comments,
       commentFormData,
     } = state
-    console.log(state);
     return (
       <div className="App">
         <NavBar
