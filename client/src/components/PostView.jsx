@@ -25,11 +25,13 @@ const PostView = (props) => {
   postViewCheck(post.id, props.match.params.id)
   return (
     <Container>
-      <Header as='h1'>{post.title}</Header>
-      {post.content && <SlateEditor
-        isReadOnly={true}
-        value={Value.fromJSON(JSON.parse(post.content))}
-      />}
+      { !!post.attributes && <>
+        <Header as='h1'>{post.attributes.title}</Header>
+        <SlateEditor
+          isReadOnly={true}
+          value={Value.fromJSON(JSON.parse(post.attributes.content))}
+        />
+      </> }
       <Header as='h3' dividing>
         Comments
       </Header>

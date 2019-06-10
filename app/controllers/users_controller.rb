@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :ensure_signed_in, only: [:create, :login]
+  skip_before_action :ensure_signed_in, only: [:create, :login, :show]
 
   def gen_token(user_id)
     payload = {id: user_id}
-    puts payload
-    puts Rails.application.credentials.secret_key_base
     JWT.encode(payload, Rails.application.credentials.secret_key_base)
   end
 
@@ -12,49 +10,29 @@ class UsersController < ApplicationController
     email = params[:email]
     password = params[:password]
 
-    user = User.find_by_credentials email, password
-    if user.nil?
+    @user = User.find_by_credentials email, password
+    if @user.nil?
       render nothing: true, status: 401
     else
-      render json: {
-        user: {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          authorization: user.authorization
-        },
-        token: gen_token(user.id)
-      }
+      render json: UserSerializer.new(@user, { params: { token: gen_token(@user.id) } })
     end
   end
 
   def verify
-    ensure_signed_in
-    user_data = {
-      id: current_user.id,
-      username: current_user.username,
-      email: current_user.email,
-    }
-    render json: user_data
+    render json: UserSerializer.new(current_user)
   end
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: UserSerializer.new(@user)
   end
 
   def create
-    puts 'hello there general kenobi'
     puts user_params
-    new_user = User.new(user_params)
-    if new_user.valid?!
-      new_user.save!
-      user_data = {
-        id: new_user.id,
-        username: new_user.username,
-        email: new_user.email,
-      }
-      render json: { user: user_data, token: gen_token(new_user.id)}
+    @new_user = User.new(user_params)
+    if @new_user.valid?!
+      @new_user.save!
+      render json: UserSerializer.new(@user, { params: { token: gen_token(@user.id) } })
     else
       render nothing: true, status: 401
     end
@@ -64,7 +42,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if current_user.id == @user.id
       if @user.update(user_params)
-        render json: {user: @user, token: gen_token(@user.id)}, status: :ok
+        render json: UserSerializer.new(@user, { params: { token: gen_token(@user.id) } }), status: :ok
       else
         render json: { errors: @user.errors }, status: :unprocessable_entity
       end

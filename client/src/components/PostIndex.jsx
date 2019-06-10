@@ -32,10 +32,10 @@ const PostIndex = props => {
       /> }
       <Item.Group divided>
         { posts.map( post => (
-          <Item key={post.id}>
+          <Item key={post.attributes.id}>
             <Item.Content>
-              <Item.Header as='h1'>{post.title}</Item.Header>
-              <Item.Meta as='h3'>{post.user.username}</Item.Meta>
+              <Item.Header as='h1'>{post.attributes.title}</Item.Header>
+              <Item.Meta as='h3'>{post.attributes.poster.username}</Item.Meta>
               <Button color='blue' onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</Button>
             </Item.Content>
           </Item>

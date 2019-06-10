@@ -2,13 +2,13 @@ class PostsController < ApplicationController
   skip_before_action :ensure_signed_in, only: [:index, :show]
 
   def index
-    @posts = Post.all
-    render json: @posts, include: :user
+    @posts = Post.includes(:user).all
+    render json: PostSerializer.new(@posts)
   end
 
   def show
-    @post = Post.find(params[:id])
-    render json: @post
+    @post = Post.includes(:user).find(params[:id])
+    render json: PostSerializer.new(@post)
   end
 
   def create
@@ -19,14 +19,15 @@ class PostsController < ApplicationController
         content: post_params['content'],
 
       }
+      puts post_data
       @post = Post.new(post_data)
       if @post.save!
-        render json: @post
+        render json: PostSerializer.new(@post)
       else
         render json: { errors: @post.errors }, status: :unprocessable_entity
       end
     else
-      render json: {status: :unauthorized}
+      render json: { status: :unauthorized }
     end
   end
 
@@ -34,12 +35,12 @@ class PostsController < ApplicationController
     if current_user.id == 1
       @post = Post.find(params[:id])
       if @post.update(post_params)
-        render json: @post, status: :ok
+        render json: PostSerializer.new(@post)
       else
         render json: { errors: @post.errors }, status: :unprocessable_entity
       end
     else
-      render json: {status: :unauthorized}
+      render json: { status: :unauthorized }
     end
   end
 
