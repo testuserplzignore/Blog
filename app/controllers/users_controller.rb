@@ -47,7 +47,7 @@ class UsersController < ApplicationController
         render json: { errors: @user.errors }, status: :unprocessable_entity
       end
     else
-      render json: {status: :unauthorized}
+      render json: { status: :unauthorized }
     end
   end
 
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
       @user.destroy
       head 204
     else
-      render json: {status: :unauthorized}
+      render json: { status: :unauthorized }
     end
   end
 
