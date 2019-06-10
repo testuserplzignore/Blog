@@ -13,14 +13,11 @@ class PostsController < ApplicationController
 
   def create
     if current_user.id == 1
-      post_data ={
+      @post = Post.new({
         user_id: 1,
         title: post_params['title'],
         content: post_params['content'],
-
-      }
-      puts post_data
-      @post = Post.new(post_data)
+      })
       if @post.save!
         render json: PostSerializer.new(@post)
       else

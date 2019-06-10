@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :ensure_signed_in, only: [:create, :login, :show]
+  skip_before_action :ensure_signed_in, only: [:create, :login]
 
   def gen_token(user_id)
     payload = {id: user_id}
