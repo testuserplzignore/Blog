@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   skip_before_action :ensure_signed_in, only: [:index, :show]
 
   def index
-    @posts = paginate Post.includes(:user).all, per_page: 5
+    @posts = paginate Post.includes(:user).all, per_page: 10
     render json: PostSerializer.new(@posts)
   end
 
