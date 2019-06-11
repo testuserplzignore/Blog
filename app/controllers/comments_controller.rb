@@ -2,8 +2,12 @@ class CommentsController < ApplicationController
   skip_before_action :ensure_signed_in, only: [:index]
 
   def index
+    @comments = paginate Comment
+      .includes(:user)
+      .where(post_id: params[:post_id])
+      .order('id desc'),
+      per_page: 10
 
-    @comments = Comment.includes(:user).where(post_id: params[:post_id])
     render json: CommentSerializer.new(@comments)
   end
 

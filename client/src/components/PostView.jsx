@@ -3,7 +3,8 @@ import { Value } from 'slate'
 import {
   Container,
   Comment,
-  Header
+  Header,
+  Pagination
 } from 'semantic-ui-react'
 import CommentIndex from './CommentIndex'
 import PostForm from './PostForm'
@@ -20,6 +21,7 @@ const PostView = (props) => {
     commentHasMark,
     commentHasBlock,
     handleCommentFormCreate,
+    commentOnPageChange,
   } = props
 
   postViewCheck(post.id, props.match.params.id)
@@ -35,8 +37,17 @@ const PostView = (props) => {
       <Header as='h3' dividing>
         Comments
       </Header>
+      { !!comments.links && <Pagination
+        pointing
+        secondary
+        defaultActivePage={1}
+        totalPages={Math.ceil(comments.links.total/comments.links.per_page)}
+        onPageChange={commentOnPageChange}
+      /> }
       <Comment.Group>
-        <CommentIndex comments={comments} />
+        <CommentIndex
+          comments={comments}
+        />
 
         <PostForm
           formData={commentFormData}

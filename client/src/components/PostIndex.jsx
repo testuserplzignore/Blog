@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Item,
+  Pagination,
  } from 'semantic-ui-react'
 
 import PostForm from './PostForm'
@@ -17,8 +18,8 @@ const PostIndex = props => {
     postHasMark,
     postHasBlock,
     handlePostFormCreate,
+    postOnPageChange,
   } = props
-
   return (
     <Container>
       { parseInt(user.id) === 1 && <PostForm
@@ -30,7 +31,7 @@ const PostIndex = props => {
         handleSubmit={handlePostFormCreate}
       /> }
       <Item.Group divided>
-        { posts.map( post => (
+        { !!posts.posts && posts.posts.map( post => (
           <Item key={post.attributes.id}>
             <Item.Content>
               <Item.Header as='h1'>{post.attributes.title}</Item.Header>
@@ -40,6 +41,13 @@ const PostIndex = props => {
           </Item>
         ))}
       </Item.Group>
+      { !!posts.links && <Pagination
+        pointing
+        secondary
+        defaultActivePage={1}
+        totalPages={Math.ceil(posts.links.total/posts.links.per_page)}
+        onPageChange={postOnPageChange}
+      /> }
     </Container>
   )
 }
