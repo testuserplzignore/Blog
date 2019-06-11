@@ -269,6 +269,7 @@ class App extends Component {
 
   async handleUpdateUser(){
     const { user, userFormData } = this.state
+    console.log('handleUpdateUser');
     const updatedUser = await updateUser(user.id, userFormData)
     this.setState({
       user: updatedUser,
