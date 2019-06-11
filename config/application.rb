@@ -30,7 +30,11 @@ module Blog
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :put, :options, :delete], :credentials => false
+        resource '*',
+          methods: [:get, :post, :put, :options, :delete],
+          headers: :any,
+          expose: ['Link', 'Total', 'Per-Page'],
+          credentials: false
       end
     end
 

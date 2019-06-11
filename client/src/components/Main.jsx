@@ -37,8 +37,10 @@ const Main = props => {
     commentHasBlock,
     handleCommentFormCreate,
     postViewCheck,
-  } = props
 
+    postOnPageChange,
+    commentOnPageChange,
+  } = props
   return(
     <Container className='main'>
       <Route exact path='/' render={props => (
@@ -52,6 +54,7 @@ const Main = props => {
           postHasMark={postHasMark}
           postHasBlock={postHasBlock}
           handlePostFormCreate={handlePostFormCreate}
+          postOnPageChange={postOnPageChange}
         />
       )} />
 
@@ -96,6 +99,7 @@ const Main = props => {
           commentHasMark={commentHasMark}
           handleCommentFormCreate={handleCommentFormCreate}
           postViewCheck={postViewCheck}
+          commentOnPageChange={commentOnPageChange}
         />
       )} />
     </Container>

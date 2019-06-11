@@ -5,6 +5,7 @@
   "dependencies": {
     "@convertkit/slate-code": "0.0.12",
     "axios": "^0.18.0",
+    "http-link-header": "^1.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",

@@ -51,9 +51,12 @@ class App extends Component {
     this.commentHasBlock = this.commentHasBlock.bind(this)
     this.handleCommentFormCreate = this.handleCommentFormCreate.bind(this)
 
+    this.postOnPageChange = this.postOnPageChange.bind(this)
+    this.commentOnPageChange = this.commentOnPageChange.bind(this)
+
     this.state = {
       user: {},
-      posts: [],
+      posts: {},
       post: {},
       comments: [],
       postFormData: {
@@ -70,6 +73,16 @@ class App extends Component {
         password: '',
       },
     }
+  }
+
+  async postOnPageChange(e, data) {
+    const posts = await getPosts(data.activePage)
+    this.setState({ posts })
+  }
+
+  async commentOnPageChange(e, data) {
+    const comments = await getPostComments(this.state.post.id, data.activePage)
+    this.setState({ comments })
   }
 
   async componentDidMount() {
@@ -288,7 +301,6 @@ class App extends Component {
       })
     }
   }
-
   render() {
     const {
       state,
@@ -313,6 +325,9 @@ class App extends Component {
       commentHasMark,
       commentHasBlock,
       handleCommentFormCreate,
+
+      postOnPageChange,
+      commentOnPageChange,
     } = this
     const {
       user,
@@ -360,6 +375,9 @@ class App extends Component {
           commentHasMark={commentHasMark}
           commentHasBlock={commentHasBlock}
           handleCommentFormCreate={handleCommentFormCreate}
+
+          postOnPageChange={postOnPageChange}
+          commentOnPageChange={commentOnPageChange}
         />
       </div>
     );
