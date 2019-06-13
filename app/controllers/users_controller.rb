@@ -28,9 +28,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts user_params
     @new_user = User.new(user_params)
-    if @new_user.valid?!
+    if @new_user.valid?
       @new_user.save!
       render json: UserSerializer.new(@user, { params: { token: gen_token(@user.id) } })
     else

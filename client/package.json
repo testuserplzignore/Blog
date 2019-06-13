@@ -3,19 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@convertkit/slate-code": "0.0.12",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "http-link-header": "^1.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
     "semantic-ui-react": "^0.87.1",
     "slate": "^0.47.4",
-    "slate-react": "^0.22.4",
-    "slate-react-placeholder": "^0.2.3",
-    "slate-soft-break": "^0.9.0"
+    "slate-react": "^0.22.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -26,10 +22,16 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

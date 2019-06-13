@@ -1,28 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Button,
   Container,
   Item,
   Pagination,
  } from 'semantic-ui-react'
+ import {
+   getPosts,
+ } from '../services/posts'
 
 import PostForm from './PostForm'
 
-const PostIndex = props => {
-  const {
-    user,
-    posts,
-    postFormData,
-    handlePostFormChange,
-    handleSlatePostChange,
-    postHasMark,
-    postHasBlock,
-    handlePostFormCreate,
-    postOnPageChange,
-  } = props
+function PostIndex(props) {
+  const { user, postFormData, handleSlatePostChange,
+    handlePostFormChange, postHasMark, postHasBlock, handlePostFormCreate, postOnPageChange } = props;
+
+  const [posts, setPosts] = useState({})
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+      try {
+        const posts = await getPosts();
+        setPosts(posts);
+      } catch (error) {
+        setIsError(true);
+      }
+      setIsLoading(false);
+    }
+    fetchData();
+  },[])
+
+  console.log(posts);
   return (
     <Container>
-      { parseInt(user.id) === 1 && <PostForm
+      { user && parseInt(user.id) === 1 && <PostForm
         formData={postFormData}
         handleChange={handlePostFormChange}
         handleSlateChange={handleSlatePostChange}

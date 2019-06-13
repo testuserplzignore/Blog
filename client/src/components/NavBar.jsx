@@ -9,16 +9,21 @@ import {
 const NavBar = props => {
   const {
     user,
-    handleLogout,
   } = props
-  
+
+  const handleLogout = (e) => {
+    e.preventDefault()
+    localStorage.removeItem('authToken')
+    props.history.push('/');
+  }
+
   return (
     <Menu size='massive'>
       <Menu.Item as='a' onClick={()=>props.history.push('/')}>Home</Menu.Item>
       <Menu.Menu position='right'>
         <Dropdown simple item text='User'>
           <Dropdown.Menu direction='right'>
-            { user.id ? (
+            { user && user.id ? (
               <>
                 <Dropdown.Item as='a' onClick={()=>props.history.push('/profile')}>profile</Dropdown.Item>
                 <Dropdown.Item as='a' onClick={handleLogout}>Logout</Dropdown.Item>

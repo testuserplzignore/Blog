@@ -1,27 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 import {
   Button,
   Form,
 } from 'semantic-ui-react'
 
+import { createUser } from '../services/users'
+
 
 const UserForm = (props) => {
   const {
-    userFormData,
-    handleUserFormChange,
-    handleUserFormCreate,
     handleUpdateUser,
     handleLogin,
   } = props
 
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    try {
+      const resp = createUser({
+        email,
+        username,
+        password
+      })
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   const buttonActive = !!handleLogin ? (
-    userFormData.email.length > 0 && userFormData.password.length > 0
+    email.length > 0 && password.length > 0
   ) : (
-    userFormData.username.length > 0 && userFormData.email.length > 0 && userFormData.password.length > 0
+    username.length > 0 && email.length > 0 && password.length > 0
   );
   return (
     <Form
-      onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}
+      onSubmit={handleRegister || handleLogin || handleUpdateUser}
     >
       { !handleLogin &&
         <Form.Field>
@@ -30,8 +48,8 @@ const UserForm = (props) => {
             type='text'
             name='username'
             placeholder='Username'
-            value={userFormData.username}
-            onChange={handleUserFormChange}
+            value={username}
+            onChange={e => setUsername(e.target.value)}
           />
         </Form.Field>
       }
@@ -41,8 +59,8 @@ const UserForm = (props) => {
           type='text'
           name='email'
           placeholder='Email'
-          value={userFormData.email}
-          onChange={handleUserFormChange}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
         />
       </Form.Field>
       <Form.Field>
@@ -51,8 +69,8 @@ const UserForm = (props) => {
           type='password'
           name='password'
           placeholder='Password'
-          value={userFormData.password}
-          onChange={handleUserFormChange}
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
       </Form.Field>
       <Button disabled={!buttonActive} color='green' type='submit'>Submit</Button>
