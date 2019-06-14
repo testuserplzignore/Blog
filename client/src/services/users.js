@@ -6,10 +6,10 @@ const createUser = async (user) => {
   return resp.data.data
 }
 
-const loginUser = async (email, password) => {
+const loginUser = async (user) => {
   const resp = await api.post('/users/login', {
-    email,
-    password
+    email: user.email,
+    password: user.password
   })
   updateToken(resp.data.data.attributes.token)
   return resp.data.data

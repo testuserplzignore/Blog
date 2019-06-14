@@ -10,6 +10,7 @@ import { createUser } from '../services/users'
 
 const UserForm = (props) => {
   const {
+    handleRegister,
     handleUpdateUser,
     handleLogin,
   } = props
@@ -18,18 +19,15 @@ const UserForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      const resp = createUser({
-        email,
-        username,
-        password
-      })
-    } catch (error) {
-      console.log(error);
+    const submit = handleRegister || handleLogin || handleUpdateUser;
+    const user = {
+      email,
+      username,
+      password,
     }
-
+    submit(user)
   }
 
   const buttonActive = !!handleLogin ? (
@@ -39,7 +37,7 @@ const UserForm = (props) => {
   );
   return (
     <Form
-      onSubmit={handleRegister || handleLogin || handleUpdateUser}
+      onSubmit={handleSubmit}
     >
       { !handleLogin &&
         <Form.Field>

@@ -54,6 +54,12 @@ function Main(props) {
           handleRegister={handleRegister}
         />
       )} />
+      <Route path='/login' render={props => (
+        <UserForm
+          {...props}
+          handleLogin={handleLogin}
+        />
+      )} />
     </Container>
   )
 }

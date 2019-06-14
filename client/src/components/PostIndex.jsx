@@ -34,7 +34,6 @@ function PostIndex(props) {
     fetchData();
   },[])
 
-  console.log(posts);
   return (
     <Container>
       { user && parseInt(user.id) === 1 && <PostForm

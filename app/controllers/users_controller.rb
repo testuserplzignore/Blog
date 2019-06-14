@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     @user = User.find_by_credentials email, password
     if @user.nil?
-      render nothing: true, status: 401
+      render json: {status: 401}, status: 401
     else
       render json: UserSerializer.new(@user, { params: { token: gen_token(@user.id) } })
     end
@@ -28,9 +28,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @new_user = User.new(user_params)
-    if @new_user.valid?
-      @new_user.save!
+    @user = User.new(user_params)
+    if @user.valid?
+      @user.save!
       render json: UserSerializer.new(@user, { params: { token: gen_token(@user.id) } })
     else
       render nothing: true, status: 401
