@@ -12,12 +12,15 @@ import {
 import PostForm from './PostForm'
 
 function PostIndex(props) {
-  const { user, postFormData, handleSlatePostChange,
-    handlePostFormChange, postHasMark, postHasBlock, handlePostFormCreate, postOnPageChange } = props;
+  const { user, postFormData, postOnPageChange } = props;
 
   const [posts, setPosts] = useState({})
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const handleSubmit = async () => {
+    console.log('handled that shit yo');
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,12 +40,7 @@ function PostIndex(props) {
   return (
     <Container>
       { user && parseInt(user.id) === 1 && <PostForm
-        formData={postFormData}
-        handleChange={handlePostFormChange}
-        handleSlateChange={handleSlatePostChange}
-        hasMark={postHasMark}
-        hasBlock={postHasBlock}
-        handleSubmit={handlePostFormCreate}
+        handleSubmit={handleSubmit}
       /> }
       <Item.Group divided>
         { !!posts.posts && posts.posts.map( post => (
