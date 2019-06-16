@@ -21,8 +21,6 @@ const PostForm = props => {
   const hasMark = (type) => content.activeMarks.some(mark => mark.type === type);
   const hasBlock = (type) => content.blocks.some(node => node.type === type);
 
-  const slateChange = ({value}) => {setContent(value)};
-
   const buttonActive = (
     (title.length > 0) && (
       !!content.data.get('undos') &&
