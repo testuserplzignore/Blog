@@ -5,6 +5,7 @@ import {
 } from 'semantic-ui-react'
 
 import PostIndex from './PostIndex'
+import PostView from './PostView'
 import UserForm from './UserForm'
 
 function Main(props) {
@@ -48,18 +49,26 @@ function Main(props) {
           user={user}
         />
       )} />
+
+      <Route path='/posts/:id' render={props => (
+        <PostView {...props}
+        />
+      )} />
+
       <Route path='/register' render={props => (
         <UserForm
           {...props}
           handleRegister={handleRegister}
         />
       )} />
+
       <Route path='/login' render={props => (
         <UserForm
           {...props}
           handleLogin={handleLogin}
         />
       )} />
+
     </Container>
   )
 }

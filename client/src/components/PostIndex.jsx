@@ -31,6 +31,7 @@ function PostIndex(props) {
         setPosts(posts);
       } catch (error) {
         setIsError(true);
+        console.log(error);
       }
       setIsLoading(false);
     }
