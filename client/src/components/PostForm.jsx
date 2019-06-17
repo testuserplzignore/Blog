@@ -11,21 +11,26 @@ import {
 const PostForm = props => {
   const {
     handleChange,
-    handleSlateChange,
     handleSubmit,
-  } = props
+  } = props;
 
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState(initialValue)
+  const [content, setContent] = useState(initialValue);
 
   const hasMark = (type) => content.activeMarks.some(mark => mark.type === type);
   const hasBlock = (type) => content.blocks.some(node => node.type === type);
+  const onSubmit = () => {
+    handleSubmit({title, content});
+    setTitle('');
+    setContent(initialValue);
+  }
 
   const buttonActive = (
     (title.length > 0) && (
       !!content.data.get('undos') &&
-      content.data.get('undos').size > 1)
-    );
+      content.data.get('undos').size > 1
+    )
+  );
 
   return(
     <Segment>
@@ -51,7 +56,7 @@ const PostForm = props => {
 
       <Button
         color='green'
-        onClick={handleSubmit}
+        onClick={onSubmit}
         disabled={!buttonActive}
       >
         Submit

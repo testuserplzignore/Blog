@@ -7,6 +7,7 @@ import {
  } from 'semantic-ui-react'
  import {
    getPosts,
+   createPost,
  } from '../services/posts'
 
 import PostForm from './PostForm'
@@ -18,8 +19,15 @@ function PostIndex(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleSubmit = async () => {
-    console.log('handled that shit yo');
+  const handleSubmit = async (post) => {
+    const postObj = {
+      title: post.title,
+      content: JSON.stringify(post.content.toJSON())
+    }
+    const resp = await createPost(postObj);
+    const posts = await getPosts();
+    console.log(posts);
+    setPosts(posts)
   }
 
   useEffect(() => {
@@ -28,6 +36,7 @@ function PostIndex(props) {
       setIsLoading(true);
       try {
         const posts = await getPosts();
+        console.log(posts);
         setPosts(posts);
       } catch (error) {
         setIsError(true);

@@ -1,60 +1,61 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import SlateEditor from './slate/SlateEditor'
 import { Value } from 'slate'
+import { getPostComments } from '../services/comments'
 import {
   Container,
   Comment,
-  Header,
-  Pagination
+  Divider,
 } from 'semantic-ui-react'
-import CommentIndex from './CommentIndex'
-import PostForm from './PostForm'
-import SlateEditor from './slate/SlateEditor'
 
-const PostView = (props) => {
-  const {
-    post,
-    comments,
-    postViewCheck,
-    commentFormData,
-    handleCommentFormChange,
-    handleSlateCommentChange,
-    commentHasMark,
-    commentHasBlock,
-    handleCommentFormCreate,
-    commentOnPageChange,
-  } = props
+const CommentIndex = props => {
+  const { postId } = props;
+  const [comments, setPost] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  postViewCheck(post.id, props.match.params.id)
-  return (
-    <Container>
-      { !!post.attributes && <>
-        <Header as='h1'>{post.attributes.title}</Header>
-        <SlateEditor
-          isReadOnly={true}
-          value={Value.fromJSON(JSON.parse(post.attributes.content))}
-        />
-      </> }
-      <Header as='h3' dividing>
-        Comments
-      </Header>
-      { !!comments.links && <Pagination
-        pointing
-        secondary
-        defaultActivePage={1}
-        totalPages={Math.ceil(comments.links.total/comments.links.per_page)}
-        onPageChange={commentOnPageChange}
-      /> }
-      <Comment.Group>
-        <CommentIndex
-          comments={comments}
-        />
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+      if (postId !== props.match.params.id) {
+        try {
+          const comments = await getPostComments(props.match.params.id);
+          setPost(comments);
+        } catch (error) {
+          console.error(error);
+          setIsError(true)
+        }
+        setIsLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
 
-        <PostForm
-          handleSubmit={handleCommentFormCreate}
-        />
-      </Comment.Group>
-    </Container>
+  return(
+    <Comment.Group>
+
+      {comments.comments &&
+        <>
+          {comments.comments.map(comment => (
+            <Container key={comment.id}>
+            <Comment>
+              <Comment.Content>
+                <Comment.Text as='h4'>{comment.attributes.title}</Comment.Text>
+                <Comment.Author as='h5'>{comment.attributes.poster.username}</Comment.Author>
+                {comment.attributes.content && <SlateEditor
+                  isReadOnly={true}
+                  value={Value.fromJSON(JSON.parse(comment.attributes.content))}
+                />}
+              </Comment.Content>
+            </Comment>
+            <Divider />
+            </Container>
+          ))}
+        </>
+      }
+    </Comment.Group>
   )
 }
 
-export default PostView
+export default CommentIndex

@@ -18,13 +18,14 @@ const PostView = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(props);
       setIsError(false);
       setIsLoading(true);
       if (post.id !== props.match.params.id) {
         try {
           const post = await getPost(props.match.params.id);
           console.log(post);
-          setPost(post.attributes);
+          setPost(post);
         } catch (error) {
           console.log(error);
           setIsError(true)
@@ -38,12 +39,18 @@ const PostView = (props) => {
   return (
     <Container>
       { !!post.id && <>
-        <Header as='h1'>{post.title}</Header>
+        <Header as='h1'>{post.attributes.title}</Header>
         <SlateEditor
           isReadOnly={true}
-          value={Value.fromJSON(JSON.parse(post.content))}
+          value={Value.fromJSON(JSON.parse(post.attributes.content))}
         />
       </> }
+
+      < CommentIndex
+        {...props}
+        postId={post.id}
+      />
+
     </Container>
   )
 }
