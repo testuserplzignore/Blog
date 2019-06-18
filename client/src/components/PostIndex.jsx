@@ -15,7 +15,8 @@ import PostForm from './PostForm'
 function PostIndex(props) {
   const { user, postFormData, postOnPageChange } = props;
 
-  const [posts, setPosts] = useState({})
+  const [posts, setPosts] = useState({});
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -35,7 +36,7 @@ function PostIndex(props) {
       setIsError(false);
       setIsLoading(true);
       try {
-        const posts = await getPosts();
+        const posts = await getPosts(page);
         console.log(posts);
         setPosts(posts);
       } catch (error) {
@@ -45,7 +46,11 @@ function PostIndex(props) {
       setIsLoading(false);
     }
     fetchData();
-  },[])
+  }, [page])
+
+  const onPageChange = (e, data) => {
+    setPage(data.activePage)
+  }
 
   return (
     <Container>
@@ -63,13 +68,14 @@ function PostIndex(props) {
           </Item>
         ))}
       </Item.Group>
-      { !!posts.links && <Pagination
+      <Pagination
         pointing
+        disabled={!posts.links}
         secondary
         defaultActivePage={1}
-        totalPages={Math.ceil(posts.links.total/posts.links.per_page)}
-        onPageChange={postOnPageChange}
-      /> }
+        totalPages={!posts.links ? 0 : Math.ceil(posts.links.total/posts.links.per_page)}
+        onPageChange={onPageChange}
+      />
     </Container>
   )
 }
