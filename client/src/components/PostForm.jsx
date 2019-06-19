@@ -10,7 +10,6 @@ import {
 
 const PostForm = props => {
   const {
-    handleChange,
     handleSubmit,
   } = props;
 

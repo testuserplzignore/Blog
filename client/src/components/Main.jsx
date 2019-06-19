@@ -7,39 +7,14 @@ import {
 import PostIndex from './PostIndex'
 import PostView from './PostView'
 import UserForm from './UserForm'
+import UserProfile from './UserProfile'
 
 function Main(props) {
   const {
     user,
-    userFormData,
-    handleUserFormChange,
-    handleUserFormCreate,
     handleLogin,
-    handleEditSelect,
-    handleUpdateUser,
-    handleDeleteUser,
+    handleUpdate,
     handleRegister,
-
-    posts,
-    postFormData,
-    handlePostFormChange,
-    handleSlatePostChange,
-    postHasMark,
-    postHasBlock,
-    handlePostFormCreate,
-
-    post,
-    comments,
-    commentFormData,
-    handleCommentFormChange,
-    handleSlateCommentChange,
-    commentHasMark,
-    commentHasBlock,
-    handleCommentFormCreate,
-    postViewCheck,
-
-    postOnPageChange,
-    commentOnPageChange,
   } = props
   return(
     <Container className='main'>
@@ -66,6 +41,13 @@ function Main(props) {
         <UserForm
           {...props}
           handleLogin={handleLogin}
+        />
+      )} />
+      <Route path='/profile' render={props => (
+        user && <UserProfile
+          {...props}
+          user={user}
+          handleUpdate={handleUpdate}
         />
       )} />
 

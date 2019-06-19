@@ -5,8 +5,6 @@ import {
   Form,
 } from 'semantic-ui-react'
 
-import { createUser } from '../services/users'
-
 
 const UserForm = (props) => {
   const {

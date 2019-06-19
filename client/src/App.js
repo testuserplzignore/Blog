@@ -8,14 +8,15 @@ import {
   verifyToken,
   createUser,
   loginUser,
+  updateUser,
 } from './services/users'
 
 function App(props) {
   const [user, setUser] = useState({})
 
-  const handleRegister = async (user) => {
+  const handleRegister = async (userData) => {
     try {
-      const resp = createUser(user)
+      const resp = createUser(userData)
       setUser(resp.attributes)
       props.history.push('/');
     } catch (error) {
@@ -23,9 +24,18 @@ function App(props) {
     }
   }
 
-  const handleLogin = async (user) => {
+  const handleUpdate = async (userData) => {
     try {
-      const resp = await loginUser(user);
+      const resp = await updateUser(userData, user.id)
+      setUser(resp.attributes)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleLogin = async (userData) => {
+    try {
+      const resp = await loginUser(userData);
       setUser(resp.attributes)
       props.history.push('/')
     } catch (error) {
@@ -64,6 +74,7 @@ function App(props) {
         user={user}
         handleRegister={handleRegister}
         handleLogin={handleLogin}
+        handleUpdate={handleUpdate}
       />
     </div>
   );

@@ -13,7 +13,7 @@ import {
 import PostForm from './PostForm'
 
 function PostIndex(props) {
-  const { user, postFormData, postOnPageChange } = props;
+  const { user } = props;
 
   const [posts, setPosts] = useState({});
   const [page, setPage] = useState(1);
@@ -25,8 +25,8 @@ function PostIndex(props) {
       title: post.title,
       content: JSON.stringify(post.content.toJSON())
     }
-    const resp = await createPost(postObj);
-    const posts = await getPosts();
+    await createPost(postObj);
+    const posts = await getPosts(page);
     console.log(posts);
     setPosts(posts)
   }
