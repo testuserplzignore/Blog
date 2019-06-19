@@ -1,34 +1,61 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Button,
   Container,
   Item,
   Pagination,
  } from 'semantic-ui-react'
+ import {
+   getPosts,
+   createPost,
+ } from '../services/posts'
 
 import PostForm from './PostForm'
 
-const PostIndex = props => {
-  const {
-    user,
-    posts,
-    postFormData,
-    handlePostFormChange,
-    handleSlatePostChange,
-    postHasMark,
-    postHasBlock,
-    handlePostFormCreate,
-    postOnPageChange,
-  } = props
+function PostIndex(props) {
+  const { user } = props;
+
+  const [posts, setPosts] = useState({});
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSubmit = async (post) => {
+    const postObj = {
+      title: post.title,
+      content: JSON.stringify(post.content.toJSON())
+    }
+    await createPost(postObj);
+    const posts = await getPosts(page);
+    console.log(posts);
+    setPosts(posts)
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+      try {
+        const posts = await getPosts(page);
+        console.log(posts);
+        setPosts(posts);
+      } catch (error) {
+        setIsError(true);
+        console.log(error);
+      }
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [page])
+
+  const onPageChange = (e, data) => {
+    setPage(data.activePage)
+  }
+
   return (
     <Container>
-      { parseInt(user.id) === 1 && <PostForm
-        formData={postFormData}
-        handleChange={handlePostFormChange}
-        handleSlateChange={handleSlatePostChange}
-        hasMark={postHasMark}
-        hasBlock={postHasBlock}
-        handleSubmit={handlePostFormCreate}
+      { user && parseInt(user.id) === 1 && <PostForm
+        handleSubmit={handleSubmit}
       /> }
       <Item.Group divided>
         { !!posts.posts && posts.posts.map( post => (
@@ -41,13 +68,14 @@ const PostIndex = props => {
           </Item>
         ))}
       </Item.Group>
-      { !!posts.links && <Pagination
+      <Pagination
         pointing
+        disabled={!posts.links}
         secondary
         defaultActivePage={1}
-        totalPages={Math.ceil(posts.links.total/posts.links.per_page)}
-        onPageChange={postOnPageChange}
-      /> }
+        totalPages={!posts.links ? 0 : Math.ceil(posts.links.total/posts.links.per_page)}
+        onPageChange={onPageChange}
+      />
     </Container>
   )
 }

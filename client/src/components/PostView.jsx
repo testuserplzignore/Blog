@@ -1,63 +1,53 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Value } from 'slate'
 import {
   Container,
-  Comment,
   Header,
-  Pagination
 } from 'semantic-ui-react'
 import CommentIndex from './CommentIndex'
-import PostForm from './PostForm'
 import SlateEditor from './slate/SlateEditor'
+import { getPost } from '../services/posts'
 
-const PostView = (props) => {
-  const {
-    post,
-    comments,
-    postViewCheck,
-    commentFormData,
-    handleCommentFormChange,
-    handleSlateCommentChange,
-    commentHasMark,
-    commentHasBlock,
-    handleCommentFormCreate,
-    commentOnPageChange,
-  } = props
+function PostView(props) {
+  const { id } = props.match.params;
+  const [post, setPost] = useState({})
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  postViewCheck(post.id, props.match.params.id)
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+      if (post.id !== id) {
+        try {
+          const post = await getPost(id);
+          console.log(post);
+          setPost(post);
+        } catch (error) {
+          console.log(error);
+          setIsError(true)
+        }
+        setIsLoading(false)
+      }
+    }
+    fetchData()
+  }, [post.id, id])
+
   return (
     <Container>
-      { !!post.attributes && <>
+      { !!post.id && <>
         <Header as='h1'>{post.attributes.title}</Header>
         <SlateEditor
           isReadOnly={true}
           value={Value.fromJSON(JSON.parse(post.attributes.content))}
         />
       </> }
-      <Header as='h3' dividing>
-        Comments
-      </Header>
-      { !!comments.links && <Pagination
-        pointing
-        secondary
-        defaultActivePage={1}
-        totalPages={Math.ceil(comments.links.total/comments.links.per_page)}
-        onPageChange={commentOnPageChange}
-      /> }
-      <Comment.Group>
-        <CommentIndex
-          comments={comments}
-        />
 
-        <PostForm
-          formData={commentFormData}
-          handleChange={handleCommentFormChange}
-          handleSlateChange={handleSlateCommentChange}
-          hasMark={commentHasMark}
-          hasBlock={commentHasBlock}
-          handleSubmit={handleCommentFormCreate}
-        />
-      </Comment.Group>
+      < CommentIndex
+        {...props}
+        postId={post.id}
+      />
+
     </Container>
   )
 }

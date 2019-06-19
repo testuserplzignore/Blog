@@ -9,16 +9,16 @@ import {
 const NavBar = props => {
   const {
     user,
-    handleLogout,
+    handleLogout
   } = props
-  
+
   return (
     <Menu size='massive'>
-      <Menu.Item as='a' onClick={()=>props.history.push('/')}>Home</Menu.Item>
+      <Menu.Item as='a' onClick={(e)=>{e.preventDefault(); props.history.push('/')}}>Home</Menu.Item>
       <Menu.Menu position='right'>
         <Dropdown simple item text='User'>
           <Dropdown.Menu direction='right'>
-            { user.id ? (
+            { user && user.id ? (
               <>
                 <Dropdown.Item as='a' onClick={()=>props.history.push('/profile')}>profile</Dropdown.Item>
                 <Dropdown.Item as='a' onClick={handleLogout}>Logout</Dropdown.Item>

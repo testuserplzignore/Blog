@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 import {
   Button,
   Form,
@@ -7,21 +8,34 @@ import {
 
 const UserForm = (props) => {
   const {
-    userFormData,
-    handleUserFormChange,
-    handleUserFormCreate,
+    handleRegister,
     handleUpdateUser,
     handleLogin,
   } = props
 
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const submit = handleRegister || handleLogin || handleUpdateUser;
+    const user = {
+      email,
+      username,
+      password,
+    }
+    submit(user)
+  }
+
   const buttonActive = !!handleLogin ? (
-    userFormData.email.length > 0 && userFormData.password.length > 0
+    email.length > 0 && password.length > 0
   ) : (
-    userFormData.username.length > 0 && userFormData.email.length > 0 && userFormData.password.length > 0
+    username.length > 0 && email.length > 0 && password.length > 0
   );
   return (
     <Form
-      onSubmit={handleUserFormCreate || handleLogin || handleUpdateUser}
+      onSubmit={handleSubmit}
     >
       { !handleLogin &&
         <Form.Field>
@@ -30,8 +44,8 @@ const UserForm = (props) => {
             type='text'
             name='username'
             placeholder='Username'
-            value={userFormData.username}
-            onChange={handleUserFormChange}
+            value={username}
+            onChange={e => setUsername(e.target.value)}
           />
         </Form.Field>
       }
@@ -41,8 +55,8 @@ const UserForm = (props) => {
           type='text'
           name='email'
           placeholder='Email'
-          value={userFormData.email}
-          onChange={handleUserFormChange}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
         />
       </Form.Field>
       <Form.Field>
@@ -51,8 +65,8 @@ const UserForm = (props) => {
           type='password'
           name='password'
           placeholder='Password'
-          value={userFormData.password}
-          onChange={handleUserFormChange}
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
       </Form.Field>
       <Button disabled={!buttonActive} color='green' type='submit'>Submit</Button>

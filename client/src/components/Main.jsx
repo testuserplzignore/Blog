@@ -9,37 +9,12 @@ import PostView from './PostView'
 import UserForm from './UserForm'
 import UserProfile from './UserProfile'
 
-const Main = props => {
+function Main(props) {
   const {
     user,
-    userFormData,
-    handleUserFormChange,
-    handleUserFormCreate,
     handleLogin,
-    handleEditSelect,
-    handleUpdateUser,
-    handleDeleteUser,
-
-    posts,
-    postFormData,
-    handlePostFormChange,
-    handleSlatePostChange,
-    postHasMark,
-    postHasBlock,
-    handlePostFormCreate,
-
-    post,
-    comments,
-    commentFormData,
-    handleCommentFormChange,
-    handleSlateCommentChange,
-    commentHasMark,
-    commentHasBlock,
-    handleCommentFormCreate,
-    postViewCheck,
-
-    postOnPageChange,
-    commentOnPageChange,
+    handleUpdate,
+    handleRegister,
   } = props
   return(
     <Container className='main'>
@@ -47,61 +22,35 @@ const Main = props => {
         <PostIndex
           {...props}
           user={user}
-          posts={posts}
-          postFormData={postFormData}
-          handlePostFormChange={handlePostFormChange}
-          handleSlatePostChange={handleSlatePostChange}
-          postHasMark={postHasMark}
-          postHasBlock={postHasBlock}
-          handlePostFormCreate={handlePostFormCreate}
-          postOnPageChange={postOnPageChange}
+        />
+      )} />
+
+      <Route path='/posts/:id' render={props => (
+        <PostView {...props}
         />
       )} />
 
       <Route path='/register' render={props => (
         <UserForm
           {...props}
-          userFormData={userFormData}
-          handleUserFormChange={handleUserFormChange}
-          handleUserFormCreate={handleUserFormCreate}
+          handleRegister={handleRegister}
         />
       )} />
 
       <Route path='/login' render={props => (
         <UserForm
           {...props}
-          userFormData={userFormData}
-          handleUserFormChange={handleUserFormChange}
           handleLogin={handleLogin}
         />
       )} />
-
       <Route path='/profile' render={props => (
-        <UserProfile
+        user && <UserProfile
           {...props}
           user={user}
-          userFormData={userFormData}
-          handleUserFormChange={handleUserFormChange}
-          handleDeleteUser={handleDeleteUser}
-          handleEditSelect={handleEditSelect}
-          handleUpdateUser={handleUpdateUser}
+          handleUpdate={handleUpdate}
         />
       )} />
 
-      <Route path='/posts/:id' render={props => (
-        <PostView {...props}
-          post={post}
-          comments={comments}
-          commentFormData={commentFormData}
-          handleCommentFormChange={handleCommentFormChange}
-          handleSlateCommentChange={handleSlateCommentChange}
-          commentHasBlock={commentHasBlock}
-          commentHasMark={commentHasMark}
-          handleCommentFormCreate={handleCommentFormCreate}
-          postViewCheck={postViewCheck}
-          commentOnPageChange={commentOnPageChange}
-        />
-      )} />
     </Container>
   )
 }

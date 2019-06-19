@@ -17,7 +17,6 @@ const getPosts = async (page) => {
   } else {
     return {posts: [...resp.data.data], links: null }
   }
-
 }
 
 const getPost = async (id) => {

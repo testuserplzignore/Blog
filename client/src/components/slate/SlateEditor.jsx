@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Editor } from 'slate-react'
-import PlaceholderPlugin from 'slate-react-placeholder'
 import {
   Button,
   Icon,
@@ -15,18 +14,6 @@ import {
 } from './slateHelpers'
 
 const plugins = [
-  {
-    queries: {
-      isEmpty: editor => {
-        return editor.value.document.text === ''
-      },
-    },
-  },
-  PlaceholderPlugin({
-    placeholder: 'Hello yes I am a placeholder',
-    when: 'isEmpty',
-    style: { color: 'black', opacity: '1', fontFamily: 'monospace' },
-  }),
   SoftBreak({shift:true}),
 ]
 
