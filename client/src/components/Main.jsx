@@ -8,6 +8,8 @@ import PostIndex from './PostIndex'
 import PostView from './PostView'
 import UserForm from './UserForm'
 import UserProfile from './UserProfile'
+import HireMe from './HireMe/HireMe'
+import ContactMe from './ContactMe'
 
 function Main(props) {
   const {
@@ -17,11 +19,16 @@ function Main(props) {
     handleRegister,
   } = props
   return(
-    <Container className='main'>
+    <Container text className='main'>
       <Route exact path='/' render={props => (
         <PostIndex
           {...props}
           user={user}
+        />
+      )} />
+      <Route exact path='/HireMe' render={props => (
+        <HireMe
+          {...props}
         />
       )} />
 
@@ -50,6 +57,8 @@ function Main(props) {
           handleUpdate={handleUpdate}
         />
       )} />
+
+      <ContactMe />
 
     </Container>
   )

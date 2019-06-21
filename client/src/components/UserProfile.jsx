@@ -6,7 +6,7 @@ function UserProfile(props) {
   const { user, handleUpdate } = props;
 
   return (
-    <div>
+    <Container>
       <ProfileItem
         label='Username'
         field='username'
@@ -19,7 +19,7 @@ function UserProfile(props) {
         item={user.email}
         handleUpdate={handleUpdate}
       />
-    </div>
+    </Container>
   )
 }
 
