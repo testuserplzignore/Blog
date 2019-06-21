@@ -186,19 +186,16 @@ class SlateEditor extends Component {
       <>
         {!isReadOnly &&
           <>
-            <Button.Group>
+            <Button.Group size="mini" style={{flexWrap: 'wrap'}}>
               {this.renderMarkButton('bold', 'bold')}
               {this.renderMarkButton('italic', 'italic')}
               {this.renderMarkButton('underlined', 'underline')}
               {this.renderMarkButton('code', 'magic')}
-            </Button.Group>{' '}
-
-            <Button.Group>
               {this.renderBlockButton('code-block', 'code')}
               {this.renderBlockButton('heading-two', 'heading')}
               {this.renderBlockButton('block-quote', 'quote right')}
-              {this.renderBlockButton('numbered-list', 'numbered list')}
-              {this.renderBlockButton('bulleted-list', 'list ol')}
+              {this.renderBlockButton('numbered-list', 'list ol')}
+              {this.renderBlockButton('bulleted-list', 'list ul')}
             </Button.Group>
           </>
         }

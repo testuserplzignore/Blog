@@ -6,7 +6,7 @@ import {
 } from 'semantic-ui-react'
 import CommentIndex from './CommentIndex'
 import SlateEditor from './slate/SlateEditor'
-import { getPost } from '../services/posts'
+import { getPost } from '../../services/posts'
 
 function PostView(props) {
   const { id } = props.match.params;

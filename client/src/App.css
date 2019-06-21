@@ -1,3 +1,10 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: 250ms;
+}
+
 .contact-me {
   background-color: white;
   text-align: center;

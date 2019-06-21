@@ -8,7 +8,7 @@ import {
  import {
    getPosts,
    createPost,
- } from '../services/posts'
+ } from '../../services/posts'
 
 import PostForm from './PostForm'
 
@@ -37,7 +37,6 @@ function PostIndex(props) {
       setIsLoading(true);
       try {
         const posts = await getPosts(page);
-        console.log(posts);
         setPosts(posts);
       } catch (error) {
         setIsError(true);
@@ -63,7 +62,7 @@ function PostIndex(props) {
             <Item.Content>
               <Item.Header as='h1'>{post.attributes.title}</Item.Header>
               <Item.Meta as='h3'>{post.attributes.poster.username}</Item.Meta>
-              <Button color='blue' onClick={()=>props.history.push(`/posts/${post.id}`)}>View Post</Button>
+              <Button color='blue' onClick={()=>props.history.push(`/blog/posts/${post.id}`)}>View Post</Button>
             </Item.Content>
           </Item>
         ))}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SlateEditor from './slate/SlateEditor'
 import { Value } from 'slate'
-import { getPostComments, createComment } from '../services/comments'
+import { getPostComments, createComment } from '../../services/comments'
 import PostForm from './PostForm'
 import {
   Container,
