@@ -7,6 +7,7 @@ import {
 import CommentIndex from './CommentIndex'
 import SlateEditor from './slate/SlateEditor'
 import { getPost } from '../../services/posts'
+import TwitterShareButton from '../Twitter/TwitterShareButton'
 
 function PostView(props) {
   const { id } = props.match.params;
@@ -21,10 +22,9 @@ function PostView(props) {
       if (post.id !== id) {
         try {
           const post = await getPost(id);
-          console.log(post);
           setPost(post);
         } catch (error) {
-          console.log(error);
+          console.error(error);
           setIsError(true)
         }
         setIsLoading(false)
@@ -32,11 +32,15 @@ function PostView(props) {
     }
     fetchData()
   }, [post.id, id])
-
+  console.log(window.location.href);
   return (
     <Container>
       { !!post.id && <>
         <Header as='h1'>{post.attributes.title}</Header>
+        <TwitterShareButton
+         url={window.location.href}
+        />
+
         <SlateEditor
           isReadOnly={true}
           value={Value.fromJSON(JSON.parse(post.attributes.content))}

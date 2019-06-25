@@ -49,9 +49,6 @@ const CommentIndex = props => {
     setPage(data.activePage)
   }
 
-
-
-  console.log(comments);
   return(
     <Comment.Group>
       <PostForm
