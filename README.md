@@ -10,4 +10,6 @@ A user should be able to visit the blog, post a comment on a post made by the bl
 
 ## technologies
 MVP - rails, react, bcrypt, axios etc. standard tech stack introduced during the course
-post MVP - Slate JS (react based WYSIWYG editor framework), Oauth 2.0, react hooks\
+post MVP - Slate JS (react based WYSIWYG editor framework), Oauth 2.0, react hooks
+
+current project implementing twitter api
