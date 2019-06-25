@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'semantic-ui-react'
+import TwitterFollowButton from './Twitter/TwitterFollowButton'
 
 function ContactMe(props) {
   const [collapsed, setCollapsed] = useState(true)
@@ -15,6 +16,10 @@ function ContactMe(props) {
     >
       Contact Me
       {!collapsed &&
+        <>
+        <TwitterFollowButton
+          screenName='RobertM52261496'
+        />
         <Form style={{ padding: '.5em' }}
           method="POST"
           action="https://formspree.io/rbrtmorrissey86@gmail.com"
@@ -41,6 +46,7 @@ function ContactMe(props) {
           />
           <Button type='submit'>Send Message</Button>
         </Form>
+        </>
       }
     </div>
     {!collapsed &&
