@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import twitterWidgetUrl from './twitterWidgetUrl'
 import executionEnvironment from 'exenv'
 
-function TwitterFollowButton(props){
-  const followButton = React.createRef();
-  const options = props.options || {};
+function TwitterShareButton(props) {
+  const shareButton = React.createRef();
+  const options = props.options || {}
 
   useEffect(()=>{
     const mountTwitterButton = () =>{
@@ -15,10 +15,10 @@ function TwitterFollowButton(props){
             console.error('Failed to load window.twttr in TwitterFollowButton');
             return
           }
-          if (!!followButton.current) {
-            window.twttr.widgets.createFollowButton(
-              props.screenName,
-              followButton.current,
+          if(!!shareButton.current){
+            window.twttr.widgets.createShareButton(
+              props.url,
+              shareButton.current,
               options,
             )
           }
@@ -26,11 +26,11 @@ function TwitterFollowButton(props){
       }
     }
     mountTwitterButton();
-  }, [followButton, options, props.screenName])
+  }, [shareButton, options, props.url])
 
   return(
-    <div ref={followButton} />
+    <div ref={shareButton} />
   )
 }
 
-export default TwitterFollowButton
+export default TwitterShareButton
