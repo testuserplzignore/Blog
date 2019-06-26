@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header, Container } from 'semantic-ui-react'
+import TwitterFollowButton from '../Twitter/TwitterFollowButton'
 
 const AboutMe = props => (
   <Container style={{ marginTop: '3em' }}>
@@ -8,6 +9,9 @@ const AboutMe = props => (
       <br />
       Morrissey
      </Header>
+     <TwitterFollowButton
+       screenName='RobertM52261496'
+     />
     <Header as='h2'>
       My passion for web development comes from being at the intersection
       of data and people.
