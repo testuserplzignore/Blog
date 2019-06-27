@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import { Value } from 'slate'
 import {
   Container,
@@ -37,6 +38,9 @@ function PostView(props) {
     <Container>
       { !!post.id && <>
         <Header as='h1'>{post.attributes.title}</Header>
+        <Header as='h3'>
+          Posted by {post.attributes.poster.username} {moment(post.attributes.created_at).fromNow()}
+        </Header>
         <TwitterShareButton
          url={window.location.href}
         />
