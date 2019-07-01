@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import SlateEditor from './slate/SlateEditor'
 import { Value } from 'slate'
 import { getPostComments, createComment } from '../../services/comments'
@@ -67,8 +68,8 @@ const CommentIndex = props => {
             <Container key={comment.id}>
             <Comment>
               <Comment.Content>
-                <Comment.Text as='h4'>{comment.attributes.title}</Comment.Text>
-                <Comment.Author as='h5'>{comment.attributes.poster.username}</Comment.Author>
+                <Comment.Author as='h4'>{comment.attributes.poster.username} commented {moment(comment.attributes.created_at).fromNow()}:</Comment.Author>
+                <Comment.Text as='h5'>{comment.attributes.title}</Comment.Text>
                 {comment.attributes.content && <SlateEditor
                   isReadOnly={true}
                   value={Value.fromJSON(JSON.parse(comment.attributes.content))}

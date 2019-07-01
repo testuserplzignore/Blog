@@ -33,7 +33,6 @@ function PostView(props) {
     }
     fetchData()
   }, [post.id, id])
-  console.log(window.location.href);
   return (
     <Container>
       { !!post.id && <>

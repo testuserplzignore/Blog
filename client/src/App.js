@@ -4,6 +4,8 @@ import Main from './components/Main'
 import NavBar from './components/NavBar'
 import { withRouter } from 'react-router-dom'
 
+import { updateToken } from './services/apiHelper'
+
 import {
   verifyToken,
   createUser,
@@ -37,7 +39,7 @@ function App(props) {
     try {
       const resp = await loginUser(userData);
       setUser(resp.attributes)
-      props.history.push('/')
+      props.history.push('/blog')
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +49,7 @@ function App(props) {
     e.preventDefault()
     setUser({})
     localStorage.removeItem('authToken')
+    updateToken()
     props.history.push('/');
   }
 
