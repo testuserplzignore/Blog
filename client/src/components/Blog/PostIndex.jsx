@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import SlateEditor from './slate/SlateEditor'
+import { Value } from 'slate'
 import {
   Button,
   Container,
@@ -62,6 +64,14 @@ function PostIndex(props) {
             <Item.Content>
               <Item.Header as='h1'>{post.attributes.title}</Item.Header>
               <Item.Meta as='h3'>{post.attributes.poster.username}</Item.Meta>
+              <Item.Description
+                className='index'
+              >
+                <SlateEditor
+                  isReadOnly={true}
+                  value={Value.fromJSON(JSON.parse(post.attributes.content))}
+                />
+              </Item.Description>
               <Button color='blue' onClick={()=>props.history.push(`/blog/posts/${post.id}`)}>View Post</Button>
             </Item.Content>
           </Item>
