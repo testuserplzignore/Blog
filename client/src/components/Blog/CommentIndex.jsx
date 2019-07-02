@@ -4,6 +4,7 @@ import { Value } from 'slate'
 import { getPostComments, createComment } from '../../services/comments'
 import PostForm from './PostForm'
 import {
+  Header,
   Container,
   Comment,
   Divider,
@@ -50,17 +51,14 @@ const CommentIndex = props => {
   }
 
   return(
+    <Container>
+    <Header style={{marginTop: '3em'}}>
+      Comments ({!!comments.comments ? comments.comments.length : 0})
+    </Header>
+    <Divider />
     <Comment.Group>
       <PostForm
         handleSubmit={handleSubmit}
-      />
-      <Pagination
-        pointing
-        disabled={!comments.links}
-        secondary
-        defaultActivePage={page}
-        totalPages={!comments.links ? 0 : Math.ceil(comments.links.total/comments.links.per_page)}
-        onPageChange={onPageChange}
       />
 
       {comments.comments &&
@@ -82,7 +80,17 @@ const CommentIndex = props => {
           ))}
         </>
       }
+      <Pagination
+        style={{marginBottom: '2em'}}
+        pointing
+        disabled={!comments.links}
+        secondary
+        defaultActivePage={page}
+        totalPages={!comments.links ? 0 : Math.ceil(comments.links.total/comments.links.per_page)}
+        onPageChange={onPageChange}
+      />
     </Comment.Group>
+    </Container>
   )
 }
 
